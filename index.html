@@ -20,16 +20,39 @@
       color: #2c3e50;
     }
 
-    .wechat-link {
-      color: green;
-      text-decoration: underline;
+    .contact-button {
+      display: inline-block;
+      padding: 8px 12px;
+      margin: 5px 0;
       cursor: pointer;
+      border-radius: 4px;
+      text-decoration: none;
+      color: white;
+      transition: background-color 0.3s ease;
     }
 
-    #wechatNumber {
+    .wechat-button {
+      background-color: green;
+    }
+
+    .email-button {
+      background-color: #0078d7; /* Outlook 蓝 */
+    }
+
+    .contact-button:hover {
+      opacity: 0.9;
+    }
+
+    .contact-button.active {
+      background-color: #555;
+    }
+
+    #wechatNumber,
+    #emailAddress {
       margin-top: 10px;
       font-weight: bold;
       color: #2c3e50;
+      display: none;
     }
 
     footer {
@@ -41,25 +64,51 @@
 </head>
 <body>
 
-  <h1>Hello / 您好</h1>
+  <h1>Kaiting Wang's Personal Website | 王恺霆的个人主页</h1>
 
   <p>Hello 您好</p>
   <p>This is the Personal Website of Kaiting Wang. 这是王恺霆的个人网页。</p>
   <p>Fancy meeting you here! 很高兴你来到这里！</p>
 
-  <!-- Click to add me on Wechat -->
-  <p><span class="wechat-link" onclick="showWechat()">Wechat 微信</span></p>
-  <div id="wechatNumber"></div>
+  <!-- Wechat Button -->
+  <div>
+    <span class="contact-button wechat-button" onclick="toggleContact('wechat')">
+      💬 Wechat 微信
+    </span>
+    <div id="wechatNumber">My Wechat ID is : wktwkt123</div>
+  </div>
+
+  <!-- Email Button -->
+  <div>
+    <span class="contact-button email-button" onclick="toggleContact('email')">
+      📧 E-mail
+    </span>
+    <div id="emailAddress">Email: kai-ting.wang@outlook.com</div>
+  </div>
 
   <footer>
-    &copy; 2025 王恺霆 | Kaiting Wang<br>
+    &copy; 2025 Kaiting Wang | 王恺霆<br>
     Powered by GitHub Pages
   </footer>
 
   <script>
-    function showWechat() {
-      var wechatId = "wktwkt123";
-      document.getElementById("wechatNumber").innerText = "My Wechat ID is : " + wechatId;
+    function toggleContact(type) {
+      const idMap = {
+        wechat: 'wechatNumber',
+        email: 'emailAddress'
+      };
+      const buttonClass = type + '-button';
+      const element = document.getElementById(idMap[type]);
+      const button = document.querySelector('.' + buttonClass);
+
+      // 切换显示/隐藏
+      if (element.style.display === 'none' || element.style.display === '') {
+        element.style.display = 'block';
+        button.classList.add('active');
+      } else {
+        element.style.display = 'none';
+        button.classList.remove('active');
+      }
     }
   </script>
 
