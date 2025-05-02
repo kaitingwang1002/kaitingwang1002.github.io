@@ -1,3 +1,67 @@
-<p>Hello 您好</p>
-<p>This is the Personal Website of Kaiting Wang. 这是王恺霆的个人网页。 </p>
-<p>Fancy meeting you here! 很高兴你来到这里。</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kaiting Wang's Personal Website | 王恺霆的个人主页</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff;
+      color: #333;
+      line-height: 1.6;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    .wechat-link {
+      color: green;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    #wechatNumber {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Hello / 您好</h1>
+
+  <p>Hello 您好</p>
+  <p>This is the Personal Website of Kaiting Wang. 这是王恺霆的个人网页。</p>
+  <p>Fancy meeting you here! 很高兴你来到这里！</p>
+
+  <!-- Click to add me on Wechat -->
+  <p><span class="wechat-link" onclick="showWechat()">Wechat 微信</span></p>
+  <div id="wechatNumber"></div>
+
+  <footer>
+    &copy; 2025 王恺霆 | Kaiting Wang<br>
+    Powered by GitHub Pages
+  </footer>
+
+  <script>
+    function showWechat() {
+      var wechatId = "wktwkt123";
+      document.getElementById("wechatNumber").innerText = "My Wechat ID is : " + wechatId;
+    }
+  </script>
+
+</body>
+</html>
