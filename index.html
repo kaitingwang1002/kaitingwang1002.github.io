@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
@@ -19,7 +20,27 @@
     h1 {
       color: #2c3e50;
     }
+@media (max-width: 600px) {
+  /* 当屏幕宽度小于或等于600px时应用以下样式 */
+  body {
+    padding: 20px; /* 减少padding，为内容提供更多空间 */
+  }
+  
+  h1 {
+    font-size: 1.5em; /* 调整标题大小 */
+  }
 
+  .contact-button {
+    display: block;
+    width: 100%; /* 按钮全宽 */
+    text-align: center; /* 文本居中 */
+    margin-bottom: 10px; /* 增加按钮间距 */
+  }
+
+  #wechatNumber, #emailAddress {
+    margin-top: 0; /* 减少上边距 */
+  }
+}
     .contact-button {
       display: inline-block;
       padding: 8px 12px;
