@@ -118,6 +118,26 @@
     <div id="emailAddress">Email: kai-ting.wang@outlook.com</div>
   </div>
 
+<!-- Page View Counter -->
+<div id="view-counter" style="font-size: 0.9em; color: #777; margin-top: 20px;">
+  Views: ...
+</div>
+
+<script>
+  // 唯一标识符（你可以改成自己的，比如 "kaitingwang-siteviews"）
+  const counterKey = 'kaitingwang-personal-website';
+
+  fetch(`https://api.countapi.xyz/update/${counterKey}?amount=1`)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('view-counter').innerText = 'Views: ' + data.value;
+    })
+    .catch(err => {
+      console.error("无法加载访问计数器");
+      document.getElementById('view-counter').innerText = 'Views: --';
+    });
+</script>
+  
   <footer>
     &copy; 2025 Kaiting Wang | 王恺霆<br>
     Powered by GitHub Pages
