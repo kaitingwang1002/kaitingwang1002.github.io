@@ -124,45 +124,45 @@
 </div>
 
 <script>
-  // 唯一标识符（你可以改成自己的，比如 "kaitingwang-siteviews"）
-  const counterKey = 'kaitingwang-personal-website';
+  // 定义 counterKey
+  const counterKey = 'kaitingwang-personal-website'; // 更改为适合您项目的唯一键值
 
-  fetch(`https://api.countapi.xyz/update/${counterKey}?amount=1`)
-    .then(res => res.json())
+  fetch(`https://api.countapi.xyz/hit/${counterKey}/`)
+    .then(response => response.json())
     .then(data => {
       document.getElementById('view-counter').innerText = 'Views: ' + data.value;
     })
-    .catch(err => {
-      console.error("无法加载访问计数器");
+    .catch(error => {
+      console.error('Error fetching view count:', error);
       document.getElementById('view-counter').innerText = 'Views: --';
     });
 </script>
-  
-  <footer>
-    &copy; 2025 Kaiting Wang | 王恺霆<br>
-    Powered by GitHub Pages
-  </footer>
 
-  <script>
-    function toggleContact(type) {
-      const idMap = {
-        wechat: 'wechatNumber',
-        email: 'emailAddress'
-      };
-      const buttonClass = type + '-button';
-      const element = document.getElementById(idMap[type]);
-      const button = document.querySelector('.' + buttonClass);
+<footer>
+  &copy; 2025 Kaiting Wang | 王恺霆<br>
+  Powered by GitHub Pages
+</footer>
 
-      // 切换显示/隐藏
-      if (element.style.display === 'none' || element.style.display === '') {
-        element.style.display = 'block';
-        button.classList.add('active');
-      } else {
-        element.style.display = 'none';
-        button.classList.remove('active');
-      }
+<script>
+  function toggleContact(type) {
+    const idMap = {
+      wechat: 'wechatNumber',
+      email: 'emailAddress'
+    };
+    const buttonClass = type + '-button';
+    const element = document.getElementById(idMap[type]);
+    const button = document.querySelector('.' + buttonClass);
+
+    // 切换显示/隐藏
+    if (element.style.display === 'none' || element.style.display === '') {
+      element.style.display = 'block';
+      button.classList.add('active');
+    } else {
+      element.style.display = 'none';
+      button.classList.remove('active');
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
