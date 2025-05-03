@@ -20,6 +20,7 @@
       color: #2c3e50;
     }
 
+    /* 默认按钮样式 */
     .contact-button {
       display: inline-block;
       padding: 8px 12px;
@@ -36,23 +37,26 @@
     }
 
     .email-button {
-      background-color: #0078d7;
+      background-color: #0078d7; /* Outlook 蓝 */
+    }
+
+    .connect-button {
+      background-color: #6a1b9a; /* 深紫色 */
     }
 
     .gray-button {
       background-color: #888;
     }
 
-    .contact-button:hover {
+    .contact-button:hover,
+    .contact-button.active { /* 添加了 active 类的样式 */
       opacity: 0.9;
-    }
-
-    .contact-button.active {
       background-color: #555;
     }
 
     #wechatNumber,
     #emailAddress,
+    #orcidInfo,
     #chronologyText {
       margin-top: 10px;
       font-weight: bold;
@@ -93,6 +97,7 @@
 
       #wechatNumber,
       #emailAddress,
+      #orcidInfo,
       #chronologyText {
         margin-top: 0;
         white-space: nowrap;
@@ -128,19 +133,18 @@
     <div id="emailAddress">Email: kai-ting.wang@outlook.com</div>
   </div>
 
-  <a
-    id="cy-effective-orcid-url"
-    class="underline"
-    href="https://orcid.org/0009-0003-2399-0844"
-    target="orcid.widget"
-    rel="me noopener noreferrer"
-    style="vertical-align: top">
-    <img
-      src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
-      style="width: 1em; margin-inline-start: 0.5em"
-      alt="ORCID iD icon"/>
-    https://orcid.org/0009-0003-2399-0844
-  </a>
+  <!-- Connect Button with ORCID Info -->
+  <div>
+    <span class="contact-button connect-button" onclick="toggleContact('orcid')">
+      📚 To Connect
+    </span>
+    <div id="orcidInfo">
+      <a href="https://orcid.org/0009-0003-2399-0844" target="_blank" rel="noopener noreferrer">
+        <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width: 1em; margin-right: 0.5em;" alt="ORCID iD icon"/>
+        https://orcid.org/0009-0003-2399-0844
+      </a>
+    </div>
+  </div>
 
   <!-- Chronology Button -->
   <div>
@@ -160,18 +164,23 @@
       const idMap = {
         wechat: 'wechatNumber',
         email: 'emailAddress',
+        orcid: 'orcidInfo',
         chronology: 'chronologyText'
       };
-      const buttonClass = type + '-button';
       const element = document.getElementById(idMap[type]);
-      const button = document.querySelector('.' + buttonClass);
+      const buttons = document.querySelectorAll('.contact-button');
+
+      // 移除所有按钮的 active 类
+      buttons.forEach(button => button.classList.remove('active'));
 
       if (element.style.display === 'none' || element.style.display === '') {
         element.style.display = 'block';
-        button.classList.add('active');
+        // 给当前点击的按钮添加 active 类
+        event.target.classList.add('active');
       } else {
         element.style.display = 'none';
-        button.classList.remove('active');
+        // 如果元素隐藏，则移除 active 类
+        event.target.classList.remove('active');
       }
     }
   </script>
