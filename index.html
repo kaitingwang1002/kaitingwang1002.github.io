@@ -48,9 +48,7 @@
       background-color: #888;
     }
 
-    .contact-button:hover,
     .contact-button.active { /* 添加了 active 类的样式 */
-      opacity: 0.9;
       background-color: #555;
     }
 
@@ -59,15 +57,8 @@
     #orcidInfo,
     #chronologyText {
       margin-top: 10px;
-      font-weight: bold;
       color: #2c3e50;
       display: none;
-    }
-
-    #chronologyText {
-      font-size: 0.9em;
-      font-weight: normal;
-      color: #666;
     }
 
     footer {
@@ -101,10 +92,6 @@
       #chronologyText {
         margin-top: 0;
         white-space: nowrap;
-      }
-
-      #chronologyText {
-        white-space: normal;
       }
     }
   </style>
@@ -168,19 +155,14 @@
         chronology: 'chronologyText'
       };
       const element = document.getElementById(idMap[type]);
-      const buttons = document.querySelectorAll('.contact-button');
-
-      // 移除所有按钮的 active 类
-      buttons.forEach(button => button.classList.remove('active'));
+      const button = event.target;
 
       if (element.style.display === 'none' || element.style.display === '') {
         element.style.display = 'block';
-        // 给当前点击的按钮添加 active 类
-        event.target.classList.add('active');
+        button.classList.add('active');
       } else {
         element.style.display = 'none';
-        // 如果元素隐藏，则移除 active 类
-        event.target.classList.remove('active');
+        button.classList.remove('active');
       }
     }
   </script>
