@@ -20,7 +20,6 @@
       color: #2c3e50;
     }
 
-    /* 默认按钮样式 */
     .contact-button {
       display: inline-block;
       padding: 8px 12px;
@@ -37,7 +36,11 @@
     }
 
     .email-button {
-      background-color: #0078d7; /* Outlook 蓝 */
+      background-color: #0078d7;
+    }
+
+    .gray-button {
+      background-color: #888;
     }
 
     .contact-button:hover {
@@ -49,11 +52,18 @@
     }
 
     #wechatNumber,
-    #emailAddress {
+    #emailAddress,
+    #chronologyText {
       margin-top: 10px;
       font-weight: bold;
       color: #2c3e50;
       display: none;
+    }
+
+    #chronologyText {
+      font-size: 0.9em;
+      font-weight: normal;
+      color: #666;
     }
 
     footer {
@@ -62,34 +72,34 @@
       color: #777;
     }
 
-    /* 移动端样式 */
     @media (max-width: 600px) {
       body {
-        padding: 20px; /* 减少padding，为内容提供更多空间 */
-        font-size: 0.9em; /* 字体缩小到原来的90% */
+        padding: 20px;
+        font-size: 0.9em;
       }
       
       h1 {
-        font-size: 1.35em; /* 调整标题大小 */
+        font-size: 1.35em;
       }
 
       .contact-button {
         display: block;
-        width: auto; /* 按钮宽度自动适应内容 */
-        text-align: left; /* 文本靠左 */
-        margin-bottom: 10px; /* 增加按钮间距 */
-        padding: 6px 8px; /* 缩小按钮尺寸 */
-        font-size: 1em; /* 与正文一样大 */
+        width: auto;
+        text-align: left;
+        margin-bottom: 10px;
+        padding: 6px 8px;
+        font-size: 1em;
       }
 
-      #wechatNumber, #emailAddress {
-        margin-top: 0; /* 减少上边距 */
-        white-space: nowrap; /* 防止换行 */
-      }
-
-      /* 特别针对邮箱行不换行 */
-      #emailAddress {
+      #wechatNumber,
+      #emailAddress,
+      #chronologyText {
+        margin-top: 0;
         white-space: nowrap;
+      }
+
+      #chronologyText {
+        white-space: normal;
       }
     }
   </style>
@@ -118,20 +128,28 @@
     <div id="emailAddress">Email: kai-ting.wang@outlook.com</div>
   </div>
 
-    <a
+  <a
     id="cy-effective-orcid-url"
     class="underline"
-     href="https://orcid.org/0009-0003-2399-0844"
-     target="orcid.widget"
-     rel="me noopener noreferrer"
-     style="vertical-align: top">
-     <img
-        src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
-        style="width: 1em; margin-inline-start: 0.5em"
-        alt="ORCID iD icon"/>
-      https://orcid.org/0009-0003-2399-0844
-    </a>
-  
+    href="https://orcid.org/0009-0003-2399-0844"
+    target="orcid.widget"
+    rel="me noopener noreferrer"
+    style="vertical-align: top">
+    <img
+      src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
+      style="width: 1em; margin-inline-start: 0.5em"
+      alt="ORCID iD icon"/>
+    https://orcid.org/0009-0003-2399-0844
+  </a>
+
+  <!-- Chronology Button -->
+  <div>
+    <span class="contact-button gray-button" onclick="toggleContact('chronology')">
+      🕒 Chronology of Kaiting Wang
+    </span>
+    <div id="chronologyText">Pending for editing</div>
+  </div>
+
   <footer>
     &copy; 2025 Kaiting Wang | 王恺霆<br>
     Powered by GitHub Pages
@@ -141,13 +159,13 @@
     function toggleContact(type) {
       const idMap = {
         wechat: 'wechatNumber',
-        email: 'emailAddress'
+        email: 'emailAddress',
+        chronology: 'chronologyText'
       };
       const buttonClass = type + '-button';
       const element = document.getElementById(idMap[type]);
       const button = document.querySelector('.' + buttonClass);
 
-      // 切换显示/隐藏
       if (element.style.display === 'none' || element.style.display === '') {
         element.style.display = 'block';
         button.classList.add('active');
