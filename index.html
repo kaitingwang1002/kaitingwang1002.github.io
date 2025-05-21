@@ -36,66 +36,53 @@
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 250px 1fr;
+      grid-template-columns: 320px 1fr;
       gap: 2rem;
     }
 
+    /* 左侧边栏样式 */
     .sidebar {
       position: sticky;
       top: 1.5rem;
       height: fit-content;
       backdrop-filter: blur(10px);
       background: var(--glass-bg);
-      padding: 1.2rem;
       border-radius: 1rem;
       border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
     }
 
     .profile-photo {
       width: 100%;
-      border-radius: 0.8rem;
-      margin-bottom: 1.2rem;
-      aspect-ratio: 1;
+      height: 320px;
       object-fit: cover;
-      border: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
     }
 
     .contact-info-bar {
       background: var(--card-bg);
-      padding: 0.8rem;
-      border-radius: 0.6rem;
-      margin-bottom: 1.2rem;
+      padding: 1rem;
       font-size: 0.85rem;
       text-align: center;
+      white-space: nowrap;
     }
 
     .info-card {
-      background: var(--card-bg);
-      border-radius: 0.6rem;
       padding: 1rem;
-      margin-bottom: 1rem;
     }
 
     .info-card h2 {
       color: var(--accent);
-      margin-bottom: 0.8rem;
+      margin-bottom: 1rem;
       font-size: 1.1rem;
     }
 
-    #cy-effective-orcid-url {
-      color: inherit;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      padding: 5px 0;
-      font-size: 0.85rem;
-    }
-
+    /* 联系信息样式 */
     .contact-card {
-      margin: 8px 0;
-      padding: 8px;
-      border-radius: 5px;
+      margin: 1rem 0;
+      padding: 0.8rem;
+      border-radius: 0.5rem;
       transition: background 0.25s;
     }
 
@@ -106,128 +93,128 @@
     .email-link {
       color: inherit;
       text-decoration: none;
-      word-break: break-all;
-      font-size: 0.85rem;
+      display: block;
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
+      white-space: nowrap;
     }
 
+    .wechat-icon {
+      font-size: 0.9em;
+      margin-right: 8px;
+      vertical-align: -1px;
+    }
+
+    /* ORCID官方样式 */
+    #cy-effective-orcid-url {
+      color: inherit;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    /* 主要内容区域 */
     .main-content {
-      padding: 1rem 0;
+      padding: 0 1rem;
     }
 
     h1 {
       font-size: 2rem;
       color: var(--accent);
-      margin-bottom: 0.8rem;
+      margin-bottom: 1.5rem;
       font-weight: 700;
-      line-height: 1.2;
     }
 
     .info-item {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .info-item h3 {
-      font-size: 0.95rem;
-      margin-bottom: 0.3rem;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
     }
 
     .info-item p {
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       color: rgba(230, 241, 255, 0.9);
       line-height: 1.6;
     }
 
+    /* 时间轴切换按钮 */
     .toggle-button {
       background: var(--card-bg);
       border: none;
       color: var(--accent);
-      padding: 0.8rem;
+      padding: 1rem;
       width: 100%;
       text-align: left;
-      border-radius: 0.6rem;
-      margin-top: 1.2rem;
+      border-radius: 0.5rem;
+      margin-top: 2rem;
       cursor: pointer;
       transition: background 0.25s;
-      font-size: 0.9rem;
-    }
-
-    .wechat-icon {
-      font-size: 0.9em;
-      margin-right: 6px;
-      vertical-align: -1px;
     }
 
     .chronology-content {
       display: none;
       background: var(--card-bg);
-      padding: 1rem;
-      border-radius: 0.6rem;
-      margin-top: 0.8rem;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      margin-top: 1rem;
       white-space: pre-wrap;
-      font-size: 0.85rem;
-      line-height: 1.6;
+      font-size: 0.9rem;
     }
 
+    /* 响应式设计 */
     @media (max-width: 768px) {
-      body {
-        padding: 1rem;
-        font-size: 14px;
-      }
-
       .container {
         grid-template-columns: 1fr;
-        gap: 1.2rem;
+        gap: 1.5rem;
       }
 
       .sidebar {
         position: static;
-        padding: 1rem;
-        margin-bottom: 1.2rem;
-      }
-
-      h1 {
-        font-size: 1.6rem;
+        width: 100%;
       }
 
       .profile-photo {
-        max-width: 180px;
+        height: 280px;
       }
 
+      .contact-info-bar,
       .info-card {
-        padding: 0.8rem;
+        white-space: normal;
+        padding: 1rem;
       }
 
-      .info-item h3 {
-        font-size: 0.9rem;
+      .email-link {
+        white-space: break-spaces;
       }
 
-      .info-item p {
-        font-size: 0.85rem;
-      }
-
-      .contact-info-bar div {
-        margin: 3px 0;
+      h1 {
+        font-size: 1.75rem;
       }
     }
 
     @media (max-width: 480px) {
       body {
-        padding: 0.8rem;
+        padding: 1rem;
       }
 
-      .sidebar {
-        border-radius: 0.8rem;
+      .profile-photo {
+        height: 250px;
       }
 
-      .toggle-button {
+      .info-item p {
         font-size: 0.85rem;
-        padding: 0.6rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- 左侧边栏 -->
     <aside class="sidebar">
       <img src="photo.jpg" alt="Kaiting Wang 的照片" class="profile-photo">
       
@@ -241,18 +228,21 @@
       <div class="info-card">
         <h2>Contact</h2>
         
-        <!-- E-mail -->
+        <!-- 邮箱 -->
         <div class="contact-card">
           <h3>E-mail</h3>
           <a href="mailto:kai-ting.wang@outlook.com" class="email-link">
             kai-ting.wang@outlook.com
           </a>
+          <a href="mailto:kai-ting.wang@my.cityu.edu.hk" class="email-link">
+            kai-ting.wang@my.cityu.edu.hk
+          </a>
         </div>
 
-        <!-- WeChat -->
+        <!-- 微信 -->
         <div class="contact-card" onclick="toggleContact('wechat')">
           <h3><i class="fab fa-weixin wechat-icon"></i>WeChat</h3>
-          <div id="wechatInfo" class="contact-info">ID: wktwkt123</div>
+          <div id="wechatInfo" style="display: none;">ID: wktwkt123</div>
         </div>
 
         <!-- ORCID -->
@@ -265,7 +255,7 @@
             rel="me noopener noreferrer">
             <img
               src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
-              style="width: 1em; margin-inline-start: 0.5em"
+              style="width: 1em; margin-left: 0.5em"
               alt="ORCID iD icon"/>
             https://orcid.org/0009-0003-2399-0844
           </a>
@@ -273,9 +263,11 @@
       </div>
     </aside>
 
+    <!-- 主要内容 -->
     <main class="main-content">
-      <h1>Kaiting Wang<br><span style="font-size: 1.4rem;">王恺霆</span></h1>
+      <h1>Kaiting Wang<br><span style="font-size: 1.5rem;">王恺霆</span></h1>
       
+      <!-- 教育背景 -->
       <div class="info-card">
         <h2>Education</h2>
         <div class="info-item">
@@ -291,6 +283,7 @@
         </div>
       </div>
 
+      <!-- 实习经历 -->
       <div class="info-card">
         <h2>Internship</h2>
         <div class="info-item">
@@ -299,6 +292,7 @@
         </div>
       </div>
 
+      <!-- 项目经历 -->
       <div class="info-card">
         <h2>Projects</h2>
         <div class="info-item">
@@ -323,6 +317,7 @@
         </div>
       </div>
 
+      <!-- 获奖情况 -->
       <div class="info-card">
         <h2>Awards</h2>
         <div class="info-item">
@@ -335,6 +330,7 @@
         </div>
       </div>
 
+      <!-- 时间轴 -->
       <button class="toggle-button" onclick="toggleChronology()">▼ View Full Chronology</button>
       <div id="chronologyContent" class="chronology-content">
 2001, Born
@@ -361,19 +357,18 @@ Under the guidance of Special Associate Professor WANG Tun, his undergraduate th
   </div>
 
   <script>
+    // 微信信息切换
     function toggleContact(type) {
-      const infoMap = {
-        wechat: document.getElementById('wechatInfo')
-      };
-      const element = infoMap[type];
+      const element = document.getElementById('wechatInfo');
       element.style.display = element.style.display === 'block' ? 'none' : 'block';
     }
 
+    // 时间轴切换
     function toggleChronology() {
       const content = document.getElementById('chronologyContent');
       const button = document.querySelector('.toggle-button');
       content.style.display = content.style.display === 'block' ? 'none' : 'block';
-      button.innerHTML = content.style.display === 'block' ? '▲ Hide Chronology' : '▼ View Full Chronology';
+      button.textContent = content.style.display === 'block' ? '▲ Hide Chronology' : '▼ View Full Chronology';
     }
   </script>
 </body>
