@@ -2,98 +2,112 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kaiting Wang's Personal Website | 王恺霆的个人主页</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #fff;
-      color: #333;
-      line-height: 1.6;
-      padding: 40px;
-      max-width: 1200px;
-      margin: auto;
+    :root {
+      --bg-color: #1a1a1a;
+      --text-color: #f1f1f1;
+      --accent-color: #00c8ff;
+      --button-bg: #2a2a2a;
+      --button-hover: #444;
+      --highlight-color: #00c8ff;
+    }
+
+    * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.7;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
     }
 
     h1 {
-      color: #2c3e50;
+      font-size: 2em;
+      color: var(--highlight-color);
+      margin-bottom: 20px;
+      font-weight: 600;
     }
 
-    /* 默认按钮样式 */
+    p {
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .contact-section {
+      margin-bottom: 20px;
+    }
+
     .contact-button {
       display: inline-block;
-      padding: 8px 12px;
-      margin: 5px 0;
-      cursor: pointer;
-      border-radius: 4px;
-      text-decoration: none;
+      background: var(--button-bg);
       color: white;
-      transition: background-color 0.3s ease;
+      border: none;
+      padding: 10px 16px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
     }
 
-    .wechat-button {
-      background-color: green;
+    .wechat-button { background: #28a745; }
+    .email-button { background: #0078d7; }
+    .connect-button { background: #6a1b9a; }
+    .gray-button { background: #888; }
+
+    .contact-button:hover,
+    .contact-button.active {
+      background: var(--button-hover);
     }
 
-    .email-button {
-      background-color: #0078d7; /* Outlook 蓝 */
-    }
-
-    .connect-button {
-      background-color: #6a1b9a; /* 深紫色 */
-    }
-
-    .gray-button {
-      background-color: #888;
-    }
-
-    .contact-button.active { /* 添加了 active 类的样式 */
-      background-color: #555;
-    }
-
-    /* 统一的展开内容样式 */
-    #wechatNumber,
-    #emailAddress,
-    #orcidInfo,
-    #chronologyText {
+    .contact-info {
       margin-top: 10px;
-      color: #2c3e50; /* 颜色统一 */
-      font-size: 0.9em; /* 字体大小统一 */
+      font-size: 0.95rem;
+      color: #aaa;
       display: none;
+      animation: fadeIn 0.3s ease forwards;
     }
 
     footer {
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #777;
+      margin-top: 60px;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 600px) {
       body {
-        padding: 20px;
-        font-size: 0.9em;
+        padding: 20px 15px;
+        font-size: 0.95rem;
       }
-      
+
       h1 {
-        font-size: 1.35em;
+        font-size: 1.5em;
       }
 
       .contact-button {
-        display: block;
-        width: auto;
+        width: 100%;
         text-align: left;
-        margin-bottom: 10px;
-        padding: 6px 8px;
-        font-size: 1em;
       }
 
-      #wechatNumber,
-      #emailAddress,
-      #orcidInfo,
-      #chronologyText {
-        margin-top: 0;
-        white-space: nowrap;
+      .contact-info {
+        white-space: pre-wrap;
       }
     }
   </style>
@@ -106,43 +120,35 @@
   <p>This is the Personal Website of Kaiting Wang. 这是王恺霆的个人网页。</p>
   <p>Fancy meeting you here! 很高兴你来到这里！</p>
 
-  <!-- Wechat Button -->
-  <div>
-    <span class="contact-button wechat-button" onclick="toggleContact('wechat')">
-      💬 Wechat 微信
-    </span>
-    <div id="wechatNumber">My Wechat ID is : wktwkt123</div>
+  <!-- Wechat -->
+  <div class="contact-section">
+    <button class="contact-button wechat-button" onclick="toggleContact('wechat')">💬 Wechat 微信</button>
+    <div id="wechatNumber" class="contact-info">My Wechat ID is : wktwkt123</div>
   </div>
 
-  <!-- Email Button -->
-  <div>
-    <span class="contact-button email-button" onclick="toggleContact('email')">
-      📧 E-mail
-    </span>
-    <a href="mailto:kai-ting.wang@outlook.com" target="_blank" rel="noopener noreferrer" id="emailAddress" style="display:none; color:#2c3e50; font-size:0.9em;">
+  <!-- Email -->
+  <div class="contact-section">
+    <button class="contact-button email-button" onclick="toggleContact('email')">📧 E-mail</button>
+    <a href="mailto:kai-ting.wang@outlook.com" target="_blank" rel="noopener noreferrer" id="emailAddress" class="contact-info" style="display:none;">
       Email: kai-ting.wang@outlook.com
     </a>
   </div>
 
-  <!-- Connect Button with ORCID Info -->
-  <div>
-    <span class="contact-button connect-button" onclick="toggleContact('orcid')">
-      📚 To Connect
-    </span>
-    <div id="orcidInfo">
-      <a href="https://orcid.org/0009-0003-2399-0844" target="_blank" rel="noopener noreferrer" style="color: #2c3e50; font-size: 0.9em;">
-        <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width: 1em; margin-right: 0.5em;" alt="ORCID iD icon"/>
+  <!-- ORCID -->
+  <div class="contact-section">
+    <button class="contact-button connect-button" onclick="toggleContact('orcid')">📚 To Connect</button>
+    <div id="orcidInfo" class="contact-info">
+      <a href="https://orcid.org/0009-0003-2399-0844" target="_blank" rel="noopener noreferrer" style="color: var(--highlight-color);">
+        <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID iD icon" style="width: 1em; margin-right: 0.5em;" />
         https://orcid.org/0009-0003-2399-0844
       </a>
     </div>
   </div>
 
-  <!-- Chronology Button -->
-  <div>
-    <span class="contact-button gray-button" onclick="toggleContact('chronology')">
-      🕒 Chronology of Kaiting Wang
-    </span>
-    <div id="chronologyText" style="white-space: pre-wrap;">
+  <!-- Chronology -->
+  <div class="contact-section">
+    <button class="contact-button gray-button" onclick="toggleContact('chronology')">🕒 Chronology of Kaiting Wang</button>
+    <div id="chronologyText" class="contact-info" style="white-space: pre-wrap; display:none;">
 2001, Born
 In the evening of October 2nd, Tuesday, August 16th in the lunar calendar, a baby boy was born in Beijing.
 
