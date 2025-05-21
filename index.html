@@ -4,16 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kaiting Wang's Personal Website | 王恺霆的个人主页</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root {
-      --bg-color: #1a1a1a;
-      --text-color: #f1f1f1;
-      --accent-color: #00c8ff;
-      --button-bg: #2a2a2a;
-      --button-hover: #444;
-      --highlight-color: #00c8ff;
+      --bg-gradient: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
+      --text-primary: #e6f1ff;
+      --accent: #64ffda;
+      --card-bg: rgba(100, 255, 218, 0.05);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --section-spacing: 4rem;
     }
 
     * {
@@ -24,194 +25,239 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.7;
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
+      background: var(--bg-gradient);
+      color: var(--text-primary);
+      line-height: 1.8;
+      min-height: 100vh;
+      padding: 2rem;
     }
 
-    h1 {
-      font-size: 2em;
-      color: var(--highlight-color);
-      margin-bottom: 20px;
-      font-weight: 600;
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 3rem;
+      position: relative;
+    }
+
+    /* 左侧边栏样式 */
+    .sidebar {
+      position: sticky;
+      top: 2rem;
+      height: fit-content;
+      backdrop-filter: blur(10px);
+      background: var(--glass-bg);
+      padding: 2rem;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
 
     .profile-photo {
       width: 100%;
-      max-width: 220px;
-      border-radius: 12px;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border-radius: 1rem;
+      margin-bottom: 2rem;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 2px solid var(--accent);
     }
 
-    p {
-      margin-bottom: 1rem;
-      font-size: 1.05rem;
+    /* 主要内容区域 */
+    .main-content {
+      padding: 2rem 0;
     }
 
-    .contact-section {
-      margin-bottom: 20px;
+    h1 {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      position: relative;
+      padding-bottom: 1rem;
     }
 
-    .contact-button {
-      display: inline-block;
-      background: var(--button-bg);
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      margin-bottom: 10px;
-      border-radius: 6px;
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .bio-section {
+      margin-bottom: var(--section-spacing);
+      font-size: 1.1rem;
+      color: rgba(230, 241, 255, 0.9);
+    }
+
+    /* 联系按钮样式 */
+    .contact-grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .contact-card {
+      background: var(--card-bg);
+      border-radius: 0.8rem;
+      padding: 1.5rem;
+      border: 1px solid rgba(100, 255, 218, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.3s ease;
     }
 
-    .wechat-button { background: #28a745; }
-    .email-button { background: #0078d7; }
-    .connect-button { background: #6a1b9a; }
-    .gray-button { background: #888; }
-
-    .contact-button:hover,
-    .contact-button.active {
-      background: var(--button-hover);
+    .contact-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(100, 255, 218, 0.1);
     }
 
-    .contact-info {
-      margin-top: 10px;
-      font-size: 0.95rem;
-      color: #aaa;
-      display: none;
-      animation: fadeIn 0.3s ease forwards;
+    .contact-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
     }
 
-    footer {
-      margin-top: 60px;
-      font-size: 0.9rem;
-      color: #666;
-      text-align: center;
+    .contact-icon {
+      font-size: 1.5rem;
+      color: var(--accent);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(5px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* 时间轴样式 */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      margin: 2rem 0;
     }
 
-    @media (max-width: 600px) {
-      body {
-        padding: 20px 15px;
-        font-size: 0.95rem;
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 0;
+      height: 100%;
+      width: 2px;
+      background: var(--accent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: var(--card-bg);
+      border-radius: 0.8rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    .timeline-year {
+      display: block;
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+
+      .sidebar {
+        position: static;
+        margin-bottom: 2rem;
       }
 
       h1 {
-        font-size: 1.5em;
-      }
-
-      .profile-photo {
-        max-width: 160px;
-        margin-bottom: 20px;
-      }
-
-      .contact-button {
-        width: 100%;
-        text-align: left;
-      }
-
-      .contact-info {
-        white-space: pre-wrap;
+        font-size: 2rem;
       }
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <!-- 左侧边栏 -->
+    <aside class="sidebar">
+      <img src="photo.jpg" alt="Kaiting Wang 的照片" class="profile-photo">
+      
+      <div class="contact-grid">
+        <!-- Wechat -->
+        <div class="contact-card" onclick="toggleContact('wechat')">
+          <div class="contact-header">
+            <i class="contact-icon fab fa-weixin"></i>
+            <h3>微信 WeChat</h3>
+          </div>
+          <div id="wechatNumber" class="contact-info">ID: wktwkt123</div>
+        </div>
 
-  <h1>Kaiting Wang's Personal Website | 王恺霆的个人主页</h1>
+        <!-- Email -->
+        <div class="contact-card" onclick="toggleContact('email')">
+          <div class="contact-header">
+            <i class="contact-icon fas fa-envelope"></i>
+            <h3>电子邮件</h3>
+          </div>
+          <a href="mailto:kai-ting.wang@outlook.com" class="contact-info">kai-ting.wang@outlook.com</a>
+        </div>
 
-  <!-- 个人照片 -->
-  <img src="photo.jpg" alt="Kaiting Wang 的照片" class="profile-photo">
+        <!-- ORCID -->
+        <div class="contact-card" onclick="toggleContact('orcid')">
+          <div class="contact-header">
+            <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" class="contact-icon" alt="ORCID">
+            <h3>学术档案</h3>
+          </div>
+          <div class="contact-info">0009-0003-2399-0844</div>
+        </div>
+      </div>
+    </aside>
 
-  <p>Hello 您好</p>
-  <p>This is the Personal Website of Kaiting Wang. 这是王恺霆的个人网页。</p>
-  <p>Fancy meeting you here! 很高兴你来到这里！</p>
+    <!-- 主要内容区域 -->
+    <main class="main-content">
+      <h1>Kaiting Wang<br><span style="font-size: 1.8rem;">王恺霆</span></h1>
+      
+      <div class="bio-section">
+        <p>Hello 您好</p>
+        <p>This is the Personal Website of Kaiting Wang. 这是王恺霆的个人网页。</p>
+        <p>Fancy meeting you here! 很高兴你来到这里！</p>
+      </div>
 
-  <!-- Wechat -->
-  <div class="contact-section">
-    <button class="contact-button wechat-button" onclick="toggleContact('wechat')">💬 Wechat 微信</button>
-    <div id="wechatNumber" class="contact-info">My Wechat ID is : wktwkt123</div>
+      <!-- 时间轴 -->
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-year">2001</span>
+          Born in Beijing on October 2nd (August 16th lunar calendar)
+        </div>
+        <!-- 其他时间轴内容 -->
+      </div>
+    </main>
   </div>
-
-  <!-- Email -->
-  <div class="contact-section">
-    <button class="contact-button email-button" onclick="toggleContact('email')">📧 E-mail</button>
-    <a href="mailto:kai-ting.wang@outlook.com" target="_blank" rel="noopener noreferrer" id="emailAddress" class="contact-info" style="display:none;">
-      Email: kai-ting.wang@outlook.com
-    </a>
-  </div>
-
-  <!-- ORCID -->
-  <div class="contact-section">
-    <button class="contact-button connect-button" onclick="toggleContact('orcid')">📚 To Connect</button>
-    <div id="orcidInfo" class="contact-info">
-      <a href="https://orcid.org/0009-0003-2399-0844" target="_blank" rel="noopener noreferrer" style="color: var(--highlight-color);">
-        <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID iD icon" style="width: 1em; margin-right: 0.5em;" />
-        https://orcid.org/0009-0003-2399-0844
-      </a>
-    </div>
-  </div>
-
-  <!-- Chronology -->
-  <div class="contact-section">
-    <button class="contact-button gray-button" onclick="toggleContact('chronology')">🕒 Chronology of Kaiting Wang</button>
-    <div id="chronologyText" class="contact-info" style="white-space: pre-wrap; display:none;">
-2001, Born
-In the evening of October 2nd, Tuesday, August 16th in the lunar calendar, a baby boy was born in Beijing.
-
-2008, Age 7
-In September, he entered Gonghua Central Primary School (巩华中心小学) in Changping District, Beijing. He achieved outstanding academic results. During this time, he received calligraphy training and participated in a choir group, winning many awards at both district and municipal levels in Beijing. He was also very interested in electronic products.
-
-2014, Age 13
-He began attending Wenhui Middle School (文汇中学) in Dongcheng District, Beijing for junior high school, and lived in the school dormitory. His academic performance remained excellent. His homeroom teacher was Mrs. CHEN Jian; influenced by her, he started reading works by Japanese writer Haruki Murakami. He also developed an interest in Korean music, self-taught Korean language, and learned classical guitar.
-
-2017, Age 16
-He was admitted to Beijing No.5 High School for senior high school studies. He once rented an apartment in Anwai Garden Community, Block III of Hepingli, Dongcheng District. Academically, his performance was above average. His homeroom teacher was Mr. YANG Zheng. During this period, he joined the Model United Nations club, attended over ten conferences, and met many excellent students across Beijing. He also participated in publicity work for the student union. Musically, he became fond of the band Sodagreen.
-
-2020, Age 19
-At the beginning of the year, he created a WeChat public account named "Reminiscent Yesterdays", where he published some personal records and original content. He was admitted to China University of Petroleum-Beijing for undergraduate studies in Mechanical Engineering, achieving above-average academic results. He lived in Building 3 of Runjie Apartment. One year later, he transferred into the major of Machine Design, Manufacturing and Automation, where his academic performance ranked mid-level within the program. His academic advisor was Mr. WANG Wenjie. He served as a class cultural-sports committee member and publicity committee member, and joined the university art troupe’s choir. Shortly after entering university, he met Miss LIU Boyuan, and during the following four years, they traveled together across China. He also became interested in stock trading. In gaming, he enjoyed playing Overwatch and Genshin Impact.
-
-2024, Age 23
-Under the guidance of Special Associate Professor WANG Tun, his undergraduate thesis titled "Research and Design of Water-Cooling System for Directly Driven Top-Drive Main Bearing" won an award. During summer vacation, he read "Killing Commendatore" and was deeply impressed. Later that year, he enrolled in the mechanical engineering program at City University of Hong Kong. This marked his first trip abroad. During his studies, he lived in Kingland Apartment in Mong Kok. His research focused on the application of MXene materials in supercapacitors, under the supervision of Professor ZHANG Kaili and Pakistani scholar HUSSAIN Iftikhar.
-
-2025, Age 24
-    </div>
-  </div>
-
-  <footer>
-    &copy; 2025 Kaiting Wang | 王恺霆<br>
-    Powered by GitHub Pages
-  </footer>
 
   <script>
+    // 平滑展开动画
     function toggleContact(type) {
-      const idMap = {
-        wechat: 'wechatNumber',
-        email: 'emailAddress',
-        orcid: 'orcidInfo',
-        chronology: 'chronologyText'
+      const elements = {
+        wechat: document.getElementById('wechatNumber'),
+        email: document.querySelector('[href^="mailto"]'),
+        orcid: document.querySelector('.contact-card:nth-child(3) .contact-info')
       };
-      const element = document.getElementById(idMap[type]);
-      const button = event.target;
 
-      if (element.style.display === 'none' || element.style.display === '') {
-        element.style.display = 'block';
-        button.classList.add('active');
-      } else {
-        element.style.display = 'none';
-        button.classList.remove('active');
-      }
+      const element = elements[type];
+      element.classList.toggle('active');
     }
-  </script>
 
+    // 滚动动画
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
 </body>
 </html>
