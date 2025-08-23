@@ -1,125 +1,222 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Kaiting Wang's Personal Website | 王恺霆的个人主页</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="color-scheme" content="dark light">
   <style>
-    body {
-      font-family: Aptos, PMingLiU, sans-serif;
-      background: #f9f9f9;
-      color: #1a1a1a;
-      margin: 0;
-      padding: 0;
+    /* ============= Base ============= */
+    :root{
+      --bg: #0b0c0f;
+      --panel: #12141a;
+      --border: #1f2330;
+      --fg: #e9eaed;
+      --muted:#9aa0ab;
+      --accent:#e9eaed;
+      --radius:16px;
+      --shadow: 0 8px 30px rgba(0,0,0,.35);
+      --glass: linear-gradient(180deg, #151821, #10131a);
     }
-    header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: white;
-      border-bottom: 1px solid #e5e5e5;
-      font-weight: 600;
-      font-size: 1.2rem;
+    html,body{margin:0;padding:0}
+    body{
+      font-family: Aptos, PMingLiU, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 20% -10%, #1b2130 0%, transparent 60%),
+        radial-gradient(1200px 600px at 120% 10%, #151b28 0%, transparent 60%),
+        linear-gradient(180deg, #0a0b0e, #0c0e12 35%, #0a0c10 100%);
+      color: var(--fg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.65;
     }
-    .section {
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 1rem;
+    /* 中文强制 PMingLiU：将中文片段用 lang="zh" 包裹可确保字体 */
+    :lang(zh){ font-family: PMingLiU, "Songti SC", STSong, serif; }
+
+    .container{max-width:1120px;margin:0 auto;padding:28px 22px;}
+    .stack{display:grid;gap:22px}
+    .grid-2{display:grid;gap:28px}
+    @media(min-width:900px){ .grid-2{grid-template-columns:1.2fr 1fr;} }
+
+    header{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter: saturate(160%) blur(12px);
+      background: rgba(11,12,15,.55);
+      border-bottom:1px solid var(--border);
     }
-    .section h2 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
+    .brand{display:flex;align-items:center;gap:12px;height:64px;font-weight:600}
+    .nav{display:flex;gap:18px;align-items:center;color:var(--muted);font-size:14px}
+    .nav a{color:inherit;text-decoration:none}
+    .nav a:hover{color:var(--fg)}
+
+    h1{margin:0 0 8px;font-weight:700;letter-spacing:-.02em;font-size:clamp(28px,4.8vw,56px)}
+    h2{margin:0 0 14px;font-weight:650;letter-spacing:-.01em;font-size:clamp(22px,3.2vw,30px)}
+    p.lead{margin:6px 0;color:var(--accent);font-size:clamp(16px,2.4vw,18px)}
+
+    .card{
+      background: var(--glass);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:20px;
     }
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      margin-bottom: 2rem;
+    .muted{color:var(--muted);font-size:13.5px}
+
+    .avatar{
+      width:min(280px,44vw);height:min(280px,44vw);
+      border-radius:20px;overflow:hidden;border:1px solid #242a38;
+      background:#0e1117; box-shadow: 0 10px 35px rgba(0,0,0,.45);
     }
-    .muted { color: #666; font-size: 0.9rem; }
-    .contact-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* Contact rows */
+    .contact{display:grid;gap:16px}
+    @media(min-width:860px){ .contact{grid-template-columns:repeat(3,1fr);} }
+    .row{display:flex;align-items:center;gap:10px}
+    .row a{color:var(--fg);text-decoration:underline;text-underline-offset:2px}
+
+    /* ORCID official snippet: keep markup exactly; style only via CSS */
+    #cy-effective-orcid-url{
+      display:inline-flex;align-items:center;gap:6px;
+      text-decoration:underline;text-underline-offset:2px;vertical-align:middle;
+      color:var(--fg);
     }
-    .chronology-content {
-      display: none;
-      white-space: pre-line;
-      margin-top: 1rem;
-      color: #333;
+
+    /* Chronology */
+    details.chrono{
+      border:1px solid var(--border);border-radius:var(--radius);
+      background: var(--glass); box-shadow: var(--shadow);
     }
-    .chronology-btn {
-      cursor: pointer;
-      color: #0070f3;
-      text-decoration: underline;
+    summary.title{
+      cursor:pointer;list-style:none;padding:18px 20px;
+      display:flex;align-items:center;justify-content:space-between;font-weight:650
     }
+    summary::-webkit-details-marker{display:none}
+    details[open] summary{border-bottom:1px solid var(--border)}
+    .chrono-body{padding:18px 20px}
+    .chrono-pre{
+      white-space:pre-wrap;margin:0;color:#d9dbe0;line-height:1.7;
+    }
+
+    footer{border-top:1px solid var(--border);color:var(--muted)}
   </style>
 </head>
 <body>
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;">
+      <div class="brand">Kaiting Wang <span lang="zh">王恺霆</span></div>
+      <nav class="nav">
+        <a href="#home">Home</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+        <a href="#chronology">Chronology</a>
+      </nav>
+    </div>
+  </header>
 
-<header>
-  Kaiting Wang 王恺霆
-</header>
-
-<section class="section" style="text-align:center;">
-  <img src="photo.jpg" alt="Kaiting Wang" style="width:160px;height:160px;border-radius:50%;object-fit:cover;margin-bottom:1rem;">
-  <h1 style="font-size:2rem;font-weight:700;">Kaiting Wang 王恺霆</h1>
-  <p>Hello 您好</p>
-  <p>This is the Personal Website of Kaiting Wang. 这是王恺霆的个人网页。</p>
-  <p>Fancy meeting you here! 很高兴你来到这里！</p>
-</section>
-
-<section class="section">
-  <h2>Education</h2>
-  <div class="card">
-    <p>2020.09 – 2024.06<br>China University of Petroleum-Beijing<br>Machine Design, Manufacturing and Automation (Bachelor)</p>
-    <p style="margin-top:1rem;">2024.09 – 2025.11<br>City University of Hong Kong (CityU)<br>MSc Mechanical Engineering with Distinction<br>Research direction: Supercapacitors, Two-dimensional Materials, MXenes</p>
-  </div>
-</section>
-
-<section class="section">
-  <h2>Contact</h2>
-  <div class="card">
-    <div style="margin-bottom:1rem;">
-      <div class="muted">E-mail</div>
-      <div class="contact-row">
-        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/microsoftoutlook.svg" alt="Email" style="width:1em;height:1em;">
-        <a href="mailto:kai-ting.wang@outlook.com" style="text-decoration:underline;">kai-ting.wang@outlook.com</a>
+  <!-- ===== Hero ===== -->
+  <main id="home" class="container">
+    <section class="grid-2" style="align-items:center;margin-top:28px;">
+      <div>
+        <h1>Kaiting Wang <span lang="zh">王恺霆</span></h1>
+        <p class="lead">Hello <span lang="zh">您好</span></p>
+        <p class="lead">This is the Personal Website of Kaiting Wang. <span lang="zh">这是王恺霆的个人网页。</span></p>
+        <p class="lead">Fancy meeting you here! <span lang="zh">很高兴你来到这里！</span></p>
       </div>
-    </div>
-    <div style="margin-bottom:1rem;">
-      <div class="muted">WeChat</div>
-      <div class="contact-row">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/WeChat_Logo.png" alt="WeChat" style="width:1em;height:1em;">
-        wktwkt123
+      <div style="justify-self:center">
+        <div class="avatar card">
+          <img src="photo.jpg" alt="Portrait of Kaiting Wang">
+        </div>
       </div>
-    </div>
-    <div>
-      <div class="muted">ORCID</div>
-      <a
-        id="cy-effective-orcid-url"
-        href="https://orcid.org/0009-0003-2399-0844"
-        target="orcid.widget"
-        rel="me noopener noreferrer"
-        style="display:inline-flex;align-items:center;gap:4px;text-decoration:underline;vertical-align:middle;">
-        <img
-          src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
-          style="width:1em;height:1em;"
-          alt="ORCID iD icon"/>
-        https://orcid.org/0009-0003-2399-0844
-      </a>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="section">
-  <h2 class="chronology-btn" onclick="toggleChronology()">Chronology of WANG Kaiting</h2>
-  <div id="chronology" class="chronology-content">
-2001, Born
+    <!-- ===== Education ===== -->
+    <section id="education" class="stack" style="margin-top:46px;">
+      <h2>Education</h2>
+      <div class="card">
+        <div class="stack">
+          <div>
+            <div class="muted">2020.09 – 2024.06</div>
+            <div style="font-weight:600;margin-top:6px">China University of Petroleum-Beijing</div>
+            <div style="margin-top:6px">Machine Design, Manufacturing and Automation (Bachelor)</div>
+          </div>
+          <div style="border-top:1px solid var(--border);padding-top:16px">
+            <div class="muted">2024.09 – 2025.11</div>
+            <div style="font-weight:600;margin-top:6px">City University of Hong Kong (CityU)</div>
+            <div style="margin-top:6px">MSc Mechanical Engineering with Distinction</div>
+            <div style="margin-top:6px">Research direction: Supercapacitors, Two-dimensional Materials, MXenes</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact" class="stack" style="margin-top:46px;">
+      <h2>Contact</h2>
+      <div class="contact">
+        <!-- Email -->
+        <a class="card" href="mailto:kai-ting.wang@outlook.com">
+          <div class="row">
+            <!-- Envelope icon -->
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+                 focusable="false">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <path d="M3 7l9 6 9-6"/>
+            </svg>
+            <div>
+              <div class="muted">E-mail</div>
+              <div style="text-decoration:underline">kai-ting.wang@outlook.com</div>
+            </div>
+          </div>
+        </a>
+
+        <!-- WeChat (official logo) -->
+        <div class="card">
+          <div class="row">
+            <img src="https://upload.wikimedia.org/wikipedia/en/a/af/WeChat_logo.svg"
+                 alt="WeChat logo" style="height:22px;width:auto;display:block"/>
+            <div>
+              <div class="muted">WeChat <span lang="zh">微信</span></div>
+              <div>ID: wktwkt123</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ORCID (official snippet kept intact; styled inline-flex via CSS) -->
+        <div class="card">
+          <div class="row" style="align-items:flex-start">
+            <div>
+              <div class="muted">ORCID</div>
+              <!-- BEGIN: official snippet (kept verbatim except allowed whitespace) -->
+              <a
+                id="cy-effective-orcid-url"
+                class="underline"
+                href="https://orcid.org/0009-0003-2399-0844"
+                target="orcid.widget"
+                rel="me noopener noreferrer"
+                style="vertical-align: top">
+                <img
+                  src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
+                  style="width: 1em; margin-inline-start: 0.5em"
+                  alt="ORCID iD icon"/>
+                https://orcid.org/0009-0003-2399-0844
+              </a>
+              <!-- END: official snippet -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Chronology ===== -->
+    <section id="chronology" class="stack" style="margin-top:46px;">
+      <details class="chrono">
+        <summary class="title">Chronology of WANG Kaiting</summary>
+        <div class="chrono-body">
+          <!-- The following text is EXACTLY as provided, unchanged -->
+          <pre class="chrono-pre">2001, Born
 In the evening of October 2nd, Tuesday, August 16th in the lunar calendar, a baby boy was born in Beijing.
 
 2008, Age 7
@@ -138,16 +235,17 @@ He was admitted to China University of Petroleum-Beijing (中国石油大学（�
 Under the guidance of Special Associate Professor WANG Tun, his undergraduate thesis titled "Research and Design of Water-Cooling System for Directly Driven Top-Drive Main Bearing" won an award. Later this year, he enrolled in the Mechanical Engineering program at City University of Hong Kong (香港城市大學). His research focused on the application of MXene materials in supercapacitors, under the supervision of Professor ZHANG Kaili and Pakistani scholar Dr. HUSSAIN Iftikhar.
 
 2025, Age 24
-……
-  </div>
-</section>
+……</pre>
+        </div>
+      </details>
+    </section>
+  </main>
 
-<script>
-function toggleChronology(){
-  const content = document.getElementById('chronology');
-  content.style.display = content.style.display === 'block' ? 'none' : 'block';
-}
-</script>
-
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:18px 0">
+      <div>© <script>document.write(new Date().getFullYear())</script> Kaiting Wang</div>
+      <div class="muted"></div>
+    </div>
+  </footer>
 </body>
 </html>
