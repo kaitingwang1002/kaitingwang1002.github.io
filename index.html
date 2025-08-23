@@ -1,360 +1,145 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kaiting Wang's Personal Website | 王恺霆的个人主页</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+import React, { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
 
-  <style>
-    :root {
-      --bg-gradient: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
-      --text-primary: #e6f1ff;
-      --accent: #64ffda;
-      --card-bg: rgba(100, 255, 218, 0.05);
-      --glass-bg: rgba(255, 255, 255, 0.05);
-    }
+const WeChatIcon = (props) => (
+  <svg viewBox="0 0 48 48" {...props}><circle cx="20" cy="20" r="14" fill="currentColor" opacity="0.15" /><circle cx="32" cy="30" r="12" fill="currentColor" opacity="0.15" /><circle cx="17" cy="18" r="2" fill="currentColor" /><circle cx="23" cy="18" r="2" fill="currentColor" /><circle cx="28" cy="28" r="2" fill="currentColor" /><circle cx="35" cy="28" r="2" fill="currentColor" /></svg>
+);
+const OrcidIcon = (props) => (
+  <svg viewBox="0 0 256 256" {...props}><circle cx="128" cy="128" r="120" fill="currentColor" opacity="0.15" /><path d="M92 72h24v112H92zM150.7 120.9c14.7 0 26.7 12.1 26.7 27s-12 27-26.7 27-26.7-12.1-26.7-27 12-27 26.7-27zm0-20.9c-26.3 0-47.7 21.9-47.7 48s21.4 48 47.7 48 47.6-21.9 47.6-48-21.4-48-47.6-48z" fill="currentColor"/></svg>
+);
+const EmailIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}><path d="M2 4h20v16H2z" fill="none"/><path d="M22 4H2v16h20V4zm-2 2v.511l-8 4.8-8-4.8V6h16zM4 18V8.289l8 4.8 8-4.8V18H4z"/></svg>
+);
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+const useDesign = () => useMemo(() => ({
+  container: "mx-auto max-w-6xl px-4 sm:px-6 lg:px-8",
+  card: "rounded-2xl border border-black/5 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur shadow-lg hover:shadow-xl transition",
+  title: "tracking-tight font-semibold text-4xl sm:text-5xl md:text-6xl text-neutral-900 dark:text-neutral-100",
+  subtitle: "text-neutral-600 dark:text-neutral-300",
+  sectionTitle: "text-2xl sm:text-3xl font-semibold text-neutral-900 dark:text-neutral-100",
+  button: "inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium border border-black/10 dark:border-white/15 bg-white/80 dark:bg-white/10 hover:bg-white/95 dark:hover:bg-white/20 transition"
+}), []);
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg-gradient);
-      color: var(--text-primary);
-      line-height: 1.7;
-      min-height: 100vh;
-      padding: 1.5rem;
-      font-size: 15px;
-    }
+export default function KaitingWangWebsite() {
+  const ui = useDesign();
+  const [expanded, setExpanded] = useState(false);
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 360px 1fr; /* 增宽左栏 */
-      gap: 2rem;
-    }
+  useEffect(() => {
+    document.title = "Kaiting Wang's Personal Website | 王恺霆的个人主页";
+    const root = document.documentElement;
+    root.style.fontFamily = "Aptos, PMingLiU, sans-serif";
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) root.classList.add('dark');
+  }, []);
 
-    .sidebar {
-      position: sticky;
-      top: 1.5rem;
-      height: fit-content;
-      backdrop-filter: blur(10px);
-      background: var(--glass-bg);
-      border-radius: 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
-    }
-
-    .profile-photo {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      border-bottom: 2px solid var(--accent);
-    }
-
-    .contact-info-bar {
-      background: var(--card-bg);
-      padding: 1.2rem;
-      font-size: 1.1rem; /* 增大字体 */
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .info-card {
-      padding: 1.5rem;
-      background: var(--card-bg);
-      border-radius: 0.8rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid rgba(100, 255, 218, 0.1);
-    }
-
-    .info-card h2 {
-      color: var(--accent);
-      margin-bottom: 1.2rem;
-      font-size: 1.2rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid rgba(100, 255, 218, 0.2);
-    }
-
-    .contact-item {
-      margin: 1rem 0;
-      padding: 0.8rem;
-    }
-
-    .email-link {
-      color: inherit;
-      text-decoration: none;
-      display: block;
-      margin: 0.5rem 0;
-      font-size: 0.9rem;
-      white-space: nowrap;
-    }
-
-    .wechat-icon {
-      font-size: 0.9em;
-      margin-right: 8px;
-      vertical-align: -1px;
-    }
-
-    #cy-effective-orcid-url {
-      color: inherit;
-      text-decoration: none;
-      display: block;
-      font-size: 0.85rem;
-      white-space: nowrap;
-      text-align: left;
-      padding: 0.5rem 0;
-    }
-
-    .main-content {
-      padding: 0 1rem;
-    }
-
-    h1 {
-      font-size: 2rem;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      font-weight: 700;
-    }
-
-    .content-section {
-      background: var(--card-bg);
-      border-radius: 0.8rem;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid rgba(100, 255, 218, 0.1);
-    }
-
-    .info-item {
-      margin-bottom: 1.5rem;
-    }
-
-    .info-item h3 {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .info-item p {
-      font-size: 0.9rem;
-      color: rgba(230, 241, 255, 0.9);
-      line-height: 1.6;
-    }
-
-    .toggle-button {
-      background: var(--card-bg);
-      border: none;
-      color: var(--accent);
-      padding: 1rem;
-      width: 100%;
-      text-align: left;
-      border-radius: 0.5rem;
-      margin-top: 2rem;
-      cursor: pointer;
-    }
-
-    .chronology-content {
-      display: none;
-      background: var(--card-bg);
-      padding: 1.5rem;
-      border-radius: 0.5rem;
-      margin-top: 1rem;
-      white-space: pre-wrap;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      .sidebar {
-        position: static;
-        width: 100%;
-      }
-
-      .profile-photo {
-        height: 280px;
-      }
-
-      .contact-info-bar {
-        white-space: normal;
-      }
-
-      .email-link {
-        white-space: break-spaces;
-      }
-
-      h1 {
-        font-size: 1.75rem;
-      }
-
-      .content-section {
-        padding: 1.2rem;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <aside class="sidebar">
-      <img src="photo.jpg" alt="Kaiting Wang 的照片" class="profile-photo">
-      
-      <div class="contact-info-bar">
-        <div>Beijing丨Hong Kong</div>
-        <div>Date of birth: 02/10/2001</div>
-        <div>+86 158 1060 0569</div>
-        <div>+852 5572 9122</div>
-      </div>
-
-      <div class="info-card">
-        <h2>Contact</h2>
-        
-        <div class="contact-item">
-          <h3>E-mail</h3>
-          <a href="mailto:kai-ting.wang@outlook.com" class="email-link">
-            kai-ting.wang@outlook.com
-          </a>
-          <a href="mailto:kai-ting.wang@my.cityu.edu.hk" class="email-link">
-            kai-ting.wang@my.cityu.edu.hk
-          </a>
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-white to-neutral-50 dark:from-neutral-950 dark:to-black text-neutral-900 dark:text-neutral-100 antialiased">
+      <header className="sticky top-0 z-50 border-b border-black/5 dark:border-white/10 backdrop-blur bg-white/80 dark:bg-black/30">
+        <div className={`${ui.container} flex h-16 items-center justify-between`}>
+          <div className="flex items-center gap-3">
+            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-neutral-300 to-neutral-50 dark:from-neutral-700 dark:to-neutral-900 border border-black/10 dark:border-white/15" />
+            <div className="text-base font-medium">Kaiting Wang 王恺霆</div>
+          </div>
+          <nav className="hidden sm:flex items-center gap-4 text-sm">
+            <a href="#home" className="hover:opacity-70">Home</a>
+            <a href="#education" className="hover:opacity-70">Education</a>
+            <a href="#contact" className="hover:opacity-70">Contact</a>
+            <a href="#chronology" className="hover:opacity-70">Chronology</a>
+          </nav>
         </div>
+      </header>
 
-        <div class="contact-item">
-          <h3><i class="fab fa-weixin wechat-icon"></i>WeChat</h3>
-          <div class="email-link">ID: wktwkt123</div>
+      <section id="home" className="relative">
+        <div className={`${ui.container} py-20 md:py-28 grid grid-cols-1 md:grid-cols-2 gap-12 items-center`}>
+          <div className="space-y-6">
+            <h1 className={ui.title}>Kaiting Wang 王恺霆</h1>
+            <p className="text-xl text-neutral-700 dark:text-neutral-300">Hello 您好</p>
+            <p className="text-lg text-neutral-700 dark:text-neutral-300">This is the Personal Website of Kaiting Wang. 这是王恺霆的个人网页。</p>
+            <p className="text-lg text-neutral-700 dark:text-neutral-300">Fancy meeting you here! 很高兴你来到这里！</p>
+            <div className="flex gap-4 pt-2">
+              <a href="#education" className={ui.button}>To Explore</a>
+              <a href="#contact" className={ui.button}>To Contact</a>
+            </div>
+          </div>
+          <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.6,ease:"easeOut"}} className="justify-self-center">
+            <div className={`${ui.card} overflow-hidden w-64 h-64 md:w-80 md:h-80 flex items-center justify-center`}>
+              <img src="/photo.jpg" alt="Portrait of Kaiting Wang" className="w-full h-full object-cover"/>
+            </div>
+          </motion.div>
         </div>
+      </section>
 
-        <div class="contact-item">
-          <h3>ORCID</h3>
-          <a
-            id="cy-effective-orcid-url"
-            href="https://orcid.org/0009-0003-2399-0844"
-            target="orcid.widget"
-            rel="me noopener noreferrer">
-            <img
-              src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
-              style="width: 1em; margin-right: 0.5em"
-              alt="ORCID iD icon"/>
-            https://orcid.org/0009-0003-2399-0844
-          </a>
+      <section id="education">
+        <div className={`${ui.container} py-16 md:py-20 space-y-10`}>
+          <h2 className={ui.sectionTitle}>Education</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <article className={`${ui.card} p-6`}>
+              <div className="text-sm text-neutral-500">2020.09 – 2024.06</div>
+              <h3 className="mt-2 font-semibold">China University of Petroleum-Beijing</h3>
+              <p className="mt-2">Machine Design, Manufacturing and Automation (Bachelor)</p>
+            </article>
+            <article className={`${ui.card} p-6`}>
+              <div className="text-sm text-neutral-500">2024.09 – 2025.11</div>
+              <h3 className="mt-2 font-semibold">City University of Hong Kong (CityU)</h3>
+              <p className="mt-2">MSc Mechanical Engineering with Distinction</p>
+              <p className="mt-2">Research direction: Supercapacitors, Two-dimensional Materials, MXenes</p>
+            </article>
+          </div>
         </div>
-      </div>
-    </aside>
+      </section>
 
-    <main class="main-content">
-      <h1>Kaiting Wang<br><span style="font-size: 1.5rem;">王恺霆</span></h1>
-      
-      <p>Hello 您好</p>
-      <p>This is the Personal Website of Kaiting Wang. 这是王恺霆的个人网页。</p>
-  <p style="margin-bottom: 3rem;">Fancy meeting you here! 很高兴你来到这里！</p>
-
-      <div class="content-section">
-        <h2>Education</h2>
-        <div class="info-item">
-          <h3>2020.09 – 2024.06</h3>
-          <p>China University of Petroleum-Beijing<br>
-          Machine Design, Manufacturing and Automation (Bachelor)</p>
+      <section id="contact">
+        <div className={`${ui.container} py-16 md:py-20 space-y-10`}>
+          <h2 className={ui.sectionTitle}>Contact</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <a className={`${ui.card} p-6 group flex items-center gap-3`} href="mailto:kai-ting.wang@outlook.com">
+              <EmailIcon className="h-8 w-8"/>
+              <div><div className="text-sm text-neutral-500">E-mail</div><div className="mt-1 font-medium underline-offset-4 group-hover:underline break-all">kai-ting.wang@outlook.com</div></div>
+            </a>
+            <div className={`${ui.card} p-6 flex items-center gap-4`}>
+              <WeChatIcon className="h-8 w-8"/>
+              <div><div className="text-sm text-neutral-500">WeChat 微信</div><div className="font-medium select-all">ID: wktwkt123</div></div>
+            </div>
+            <a className={`${ui.card} p-6 group`} href="https://orcid.org/0009-0003-2399-0844" target="_blank" rel="noreferrer noopener">
+              <div className="flex items-center gap-3">
+                <OrcidIcon className="h-8 w-8"/>
+                <div><div className="text-sm text-neutral-500">ORCID</div><div className="font-medium underline-offset-4 group-hover:underline">https://orcid.org/0009-0003-2399-0844</div></div>
+              </div>
+            </a>
+          </div>
         </div>
-        <div class="info-item">
-          <h3>2024.09 – 2025.11</h3>
-          <p>City University of Hong Kong (CityU)<br>
-          MSc Mechanical Engineering<br>
-          Research direction: MXenes, Supercapacitors, Two-dimensional Materials</p>
+      </section>
+
+      <section id="chronology">
+        <div className={`${ui.container} py-16 md:py-20 space-y-6`}>
+          <button onClick={()=>setExpanded(v=>!v)} className={`${ui.card} w-full p-6 flex items-center justify-between`} aria-expanded={expanded} aria-controls="chronology-panel">
+            <span className="text-lg sm:text-xl font-semibold">Chronology of WANG Kaiting</span>
+            <span className="ml-4 text-sm opacity-70">{expanded?"Click to collapse":"Click to expand"}</span>
+          </button>
+          <motion.div id="chronology-panel" initial={false} animate={{height:expanded?"auto":0,opacity:expanded?1:0}} className="overflow-hidden">
+            <div className="grid gap-4">
+              {["2001, Born","2008, Age 7","2014, Age 13","2017, Age 16","2020, Age 19","2024, Age 23","2025, Age 24"].map((year,idx)=>(
+                <motion.article key={idx} initial={{opacity:0,y:8}} whileInView={{opacity:1,y:0}} viewport={{once:true,margin:"-50px"}} transition={{duration:0.35,delay:idx*0.03}} className={`${ui.card} p-6`}>
+                  <div className="text-sm text-neutral-500">{year}</div>
+                  <p className="mt-2 leading-relaxed">
+                    {idx===0?"In the evening of October 2nd, Tuesday, August 16th in the lunar calendar, a baby boy was born in Beijing.":
+                     idx===1?"In September, he entered Gonghua Central Primary School (巩华中心小学) in Changping District, Beijing.":
+                     idx===2?"He began attending Wenhui Middle School (北京市文汇中学) in Dongcheng District, Beijing. His homeroom teacher was Mrs. CHEN Jian.":
+                     idx===3?"He was admitted to Beijing No.5 High School (北京市第五中学) for senior high school studies. His homeroom teacher was Mr. YANG Zheng.":
+                     idx===4?"He was admitted to China University of Petroleum-Beijing (中国石油大学（北京）). One year later, he transferred into the major of Machine Design, Manufacturing and Automation. His academic advisor was Mr. WANG Wenjie.":
+                     idx===5?"Under the guidance of Special Associate Professor WANG Tun, his undergraduate thesis titled \"Research and Design of Water-Cooling System for Directly Driven Top-Drive Main Bearing\" won an award. Later this year, he enrolled in the Mechanical Engineering program at City University of Hong Kong (香港城市大學). His research focused on the application of MXene materials in supercapacitors, under the supervision of Professor ZHANG Kaili and Pakistani scholar Dr. HUSSAIN Iftikhar.":"……"}
+                  </p>
+                </motion.article>
+              ))}
+            </div>
+          </motion.div>
         </div>
-      </div>
+      </section>
 
-      <div class="content-section">
-        <h2>Internship</h2>
-        <div class="info-item">
-          <h3>2023.06-2023.07</h3>
-          <p>RG PETRO-MACHINERY GROUP CO. LTD</p>
+      <footer className="border-t border-black/5 dark:border-white/10">
+        <div className={`${ui.container} py-8 text-sm text-neutral-600 dark:text-neutral-400 flex flex-col sm:flex-row items-center justify-between gap-4`}>
+          <div>© {new Date().getFullYear()} Kaiting Wang. All rights reserved.</div>
         </div>
-      </div>
-
-      <div class="content-section">
-        <h2>Projects</h2>
-        <div class="info-item">
-          <h3>National "Jing Diao Cup" Graduation Design Competition</h3>
-          <p>Research and Design of the Water-Cooling System for Direct-Drive Top Drive Main Bearing, 2024</p>
-        </div>
-        <div class="info-item">
-          <h3>Comprehensive Design of Mechatronic Control System</h3>
-          <p>Plane XY - Design of Stepping Digital Control, 2024</p>
-        </div>
-        <div class="info-item">
-          <h3>Research Project</h3>
-          <p>Novel Design of Micro/Nano Technologies for Energy Storage for MEMs, 2024</p>
-        </div>
-        <div class="info-item">
-          <h3>Group Project</h3>
-          <p>Multi-Mode Water-Tube-Based Triboelectric Nanogenerator Designed for Low-Frequency Energy Harvesting with Ultrahigh Volumetric Charge Density, 2024</p>
-        </div>
-        <div class="info-item">
-          <h3>National College Student Mechanical Innovation Design Competition</h3>
-          <p>Bionic Frog, 2023</p>
-        </div>
-      </div>
-
-      <div class="content-section">
-        <h2>Awards</h2>
-        <div class="info-item">
-          <h3>Merit Student</h3>
-          <p>2023, 2021</p>
-        </div>
-        <div class="info-item">
-          <h3>Excellent Young Volunteers</h3>
-          <p>2021</p>
-        </div>
-      </div>
-
-      <!-- 时间轴 -->
-      <button class="toggle-button" onclick="toggleChronology()">▼ View Full Chronology</button>
-      <div id="chronologyContent" class="chronology-content">
-2001, Born
-In the evening of October 2nd, Tuesday, August 16th in the lunar calendar, a baby boy was born in Beijing.
-
-2008, Age 7
-In September, he entered Gonghua Central Primary School (巩华中心小学) in Changping District, Beijing. He achieved outstanding academic results. During this time, he received calligraphy training and participated in a choir group, winning many awards at both district and municipal levels in Beijing. He was also very interested in electronic products.
-
-2014, Age 13
-He began attending Wenhui Middle School (文汇中学) in Dongcheng District, Beijing for junior high school, and lived in the school dormitory. His academic performance remained excellent. His homeroom teacher was Mrs. CHEN Jian; influenced by her, he started reading works by Japanese writer Haruki Murakami. He also developed an interest in Korean music, self-taught Korean language, and learned classical guitar.
-
-2017, Age 16
-He was admitted to Beijing No.5 High School for senior high school studies. He once rented an apartment in Anwai Garden Community, Block III of Hepingli, Dongcheng District. Academically, his performance was above average. His homeroom teacher was Mr. YANG Zheng. During this period, he joined the Model United Nations club, attended over ten conferences, and met many excellent students across Beijing. He also participated in publicity work for the student union. Musically, he became fond of the band Sodagreen.
-
-2020, Age 19
-At the beginning of the year, he created a WeChat public account named "Reminiscent Yesterdays", where he published some personal records and original content. He was admitted to China University of Petroleum-Beijing for undergraduate studies in Mechanical Engineering, achieving above-average academic results. He lived in Building 3 of Runjie Apartment. One year later, he transferred into the major of Machine Design, Manufacturing and Automation, where his academic performance ranked mid-level within the program. His academic advisor was Mr. WANG Wenjie. He served as a class cultural-sports committee member and publicity committee member, and joined the university art troupe’s choir. Shortly after entering university, he met Miss LIU Boyuan, and during the following four years, they traveled together across China. He also became interested in stock trading. In gaming, he enjoyed playing Overwatch and Genshin Impact.
-
-2024, Age 23
-Under the guidance of Special Associate Professor WANG Tun, his undergraduate thesis titled "Research and Design of Water-Cooling System for Directly Driven Top-Drive Main Bearing" won an award. During summer vacation, he read "Killing Commendatore" and was deeply impressed. Later that year, he enrolled in the mechanical engineering program at City University of Hong Kong. This marked his first trip abroad. During his studies, he lived in Kingland Apartment in Mong Kok. His research focused on the application of MXene materials in supercapacitors, under the supervision of Professor ZHANG Kaili and Pakistani scholar HUSSAIN Iftikhar.
-
-2025, Age 24
-      </div>
-    </main>
-  </div>
-
-  <script>
-    // 微信信息切换
-    function toggleContact(type) {
-      const element = document.getElementById('wechatInfo');
-      element.style.display = element.style.display === 'block' ? 'none' : 'block';
-    }
-
-    // 时间轴切换
-    function toggleChronology() {
-      const content = document.getElementById('chronologyContent');
-      const button = document.querySelector('.toggle-button');
-      content.style.display = content.style.display === 'block' ? 'none' : 'block';
-      button.textContent = content.style.display === 'block' ? '▲ Hide Chronology' : '▼ View Full Chronology';
-    }
-  </script>
-</body>
-</html>
+      </footer>
+    </div>
+  );
+}
