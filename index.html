@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kaiting Wang's Personal Website | 王恺霆的个人主页</title>
   <style>
+    html {
+      scroll-behavior: smooth; /* 平滑滚动 */
+    }
+
     body {
       margin: 0;
       font-family: Aptos, PMingLiU, sans-serif;
@@ -12,125 +16,188 @@
       color: #fff;
       line-height: 1.6;
     }
+
     header {
       padding: 2rem;
       text-align: center;
     }
+
     header img {
       width: 150px;
       height: 150px;
       border-radius: 50%;
       object-fit: cover;
     }
+
     h1 {
       margin-top: 1rem;
       font-size: 2rem;
     }
+
     h2 {
       font-size: 1.5rem;
       margin-top: 3rem;
       text-align: center;
     }
+
     section {
       max-width: 800px;
       margin: 0 auto;
       padding: 1rem 2rem;
     }
+
     a {
-      color: #4da3ff; /* 提高对比度的蓝色 */
+      color: #4da3ff;
       text-decoration: underline;
     }
+
     .contact-item {
       display: flex;
       align-items: center;
       gap: 8px;
       margin: 0.5rem 0;
     }
+
     .contact-item img {
-      width: 16px; 
+      width: 16px;
       height: 16px;
     }
+
     .chronology-content {
       display: none;
       margin-top: 1rem;
       white-space: pre-wrap;
     }
+
     .chronology-title {
       text-align: center;
       font-size: 1.5rem;
       margin-top: 2rem;
       cursor: pointer;
     }
+
     .chronology-title:hover {
       text-decoration: underline;
+    }
+
+    /* 侧边导航栏 */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 200px;
+      background-color: #111;
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      z-index: 1000;
+    }
+
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+
+    .sidebar a:hover {
+      background-color: #4da3ff;
+      color: #000;
+      border-radius: 4px;
+    }
+
+    /* 主内容区域 */
+    main {
+      margin-left: 220px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      main {
+        margin-left: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="photo.jpg" alt="Kaiting Wang">
-    <h1>Kaiting Wang 王恺霆</h1>
-    <p>Hello 您好<br>
-    This is the Personal Website of Kaiting Wang. 这是王恺霆的个人网页。<br>
-    Fancy meeting you here! 很高兴你来到这里！</p>
-  </header>
+  <!-- 侧边导航栏 -->
+  <div class="sidebar">
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+    <a href="#publication">Publication</a>
+    <a href="#honors">Honors & Awards</a>
+  </div>
 
-  <section>
-    <h2>Education</h2>
-    <p>2020.09 – 2024.06<br>
-    China University of Petroleum-Beijing<br>
-    Machine Design, Manufacturing and Automation (Bachelor)</p>
-    <p>2024.09 – 2025.11<br>
-    City University of Hong Kong (CityU)<br>
-    MSc Mechanical Engineering with Distinction<br>
-    Research direction: Supercapacitors, Two-dimensional Materials, MXenes</p>
-  </section>
+  <!-- 主内容区域 -->
+  <main>
+    <header>
+      <img src="photo.jpg" alt="Kaiting Wang">
+      <h1>Kaiting Wang 王恺霆</h1>
+      <p>Hello 您好<br>
+      This is the Personal Website of Kaiting Wang. 这是王恺霆的个人网页。<br>
+      Fancy meeting you here! 很高兴你来到这里！</p>
+    </header>
 
-  <section>
-    <h2>Contact</h2>
-    <div class="contact-item">
-      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="email">
-      <a href="mailto:kai-ting.wang@outlook.com">kai-ting.wang@outlook.com</a>
-    </div>
-    <div class="contact-item">
-      <img src="https://res.wx.qq.com/a/wx_fed/assets/res/NTI4MWU5.ico" alt="WeChat">
-      <span>WeChat 微信 ID: wktwkt123</span>
-    </div>
-    <div class="contact-item">
-      <span>ORCID</span>
-      <a id="cy-effective-orcid-url"
-         href="https://orcid.org/0009-0003-2399-0844"
-         target="orcid.widget"
-         rel="me noopener noreferrer"
-         style="display:inline-flex;align-items:center;gap:4px;vertical-align:middle;">
-         <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
-              style="width:0.8em;height:0.8em;"
-              alt="ORCID iD icon"/>
-         https://orcid.org/0009-0003-2399-0844
-      </a>
-    </div>
-  </section>
+    <section id="education">
+      <h2>Education</h2>
+      <p>2020.09 – 2024.06<br>
+      China University of Petroleum-Beijing<br>
+      Machine Design, Manufacturing and Automation (Bachelor)</p>
+      <p>2024.09 – 2025.11<br>
+      City University of Hong Kong (CityU)<br>
+      MSc Mechanical Engineering with Distinction<br>
+      Research direction: Supercapacitors, Two-dimensional Materials, MXenes</p>
+    </section>
 
-  <section>
-    <h2>Publication</h2>
-    <p>Wang, K., Hussain, I., Singh, K., & Zhang, K. (2025). Fabrication of MXene films through various techniques: a mini review [10.1039/D5NR01272D]. Nanoscale, 17(26), 15676-15689.
-    <a href="https://doi.org/10.1039/D5NR01272D" target="_blank" rel="noopener noreferrer">https://doi.org/10.1039/D5NR01272D</a></p>
-  </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="contact-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="email">
+        <a href="mailto:kai-ting.wang@outlook.com">kai-ting.wang@outlook.com</a>
+      </div>
+      <div class="contact-item">
+        <img src="https://res.wx.qq.com/a/wx_fed/assets/res/NTI4MWU5.ico" alt="WeChat">
+        <span>WeChat 微信 ID: wktwkt123</span>
+      </div>
+      <div class="contact-item">
+        <span>ORCID</span>
+        <a id="cy-effective-orcid-url"
+           href="https://orcid.org/0009-0003-2399-0844"
+           target="orcid.widget"
+           rel="me noopener noreferrer"
+           style="display:inline-flex;align-items:center;gap:4px;vertical-align:middle;">
+           <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
+                style="width:0.8em;height:0.8em;"
+                alt="ORCID iD icon"/>
+           https://orcid.org/0009-0003-2399-0844
+        </a>
+      </div>
+    </section>
 
-  <section>
-    <h2>Honors & Awards</h2>
-  <p style="text-align:center;">
-      China University of Petroleum, Beijing Merit Student & Scholarship, 2021.<br>
-      Provincial First Prize in the National College Student Financial Challenge, 2022.<br>
-      Second Prize in National “Jing Diao Cup” Graduation Design Competition, 2024.<br>
-      Global University Presidents & Leaders Summit, 2024.<br>
-      Dr. & Mrs. YEUNG Kin Man Scholarship, 2025
-    </p>
-  </section>
-  
-  <section>
-    <div class="chronology-title" onclick="toggleChronology()">Chronology of WANG Kaiting</div>
-    <div class="chronology-content" id="chronology">
+    <section id="publication">
+      <h2>Publication</h2>
+      <p>Wang, K., Hussain, I., Singh, K., & Zhang, K. (2025). Fabrication of MXene films through various techniques: a mini review [10.1039/D5NR01272D]. Nanoscale, 17(26), 15676-15689.
+      <a href="https://doi.org/10.1039/D5NR01272D" target="_blank" rel="noopener noreferrer">https://doi.org/10.1039/D5NR01272D</a></p>
+    </section>
+
+    <section id="honors">
+      <h2>Honors & Awards</h2>
+      <p style="text-align:center;">
+        China University of Petroleum, Beijing Merit Student & Scholarship, 2021.<br>
+        Provincial First Prize in the National College Student Financial Challenge, 2022.<br>
+        Second Prize in National “Jing Diao Cup” Graduation Design Competition, 2024.<br>
+        Global University Presidents & Leaders Summit, 2024.<br>
+        Dr. & Mrs. YEUNG Kin Man Scholarship, 2025
+      </p>
+    </section>
+
+    <section>
+      <div class="chronology-title" onclick="toggleChronology()">Chronology of WANG Kaiting</div>
+      <div class="chronology-content" id="chronology-content">
 2001, Born
 In the evening of October 2nd, Tuesday, August 16th in the lunar calendar, a baby boy was born in Beijing.
 
@@ -151,13 +218,13 @@ Under the guidance of Special Associate Prof. WANG Tun, his undergraduate thesis
 
 2025, Age 24
 He graduated from City University of Hong Kong (香港城市大學) with a Master of Science (MSc) in Mechanical Engineering, achieving Distinction and receiving the Dr. & Mrs. Yeung Kin Man Scholarship (100,000 HKD). In the second half of the year, he enrolled at Western University (University of Western Ontario), Canada, to pursue a PhD in Mechanical and Materials Engineering under the supervision of Dr. HaoTian Harvey Shi. His research focuses on the development of micro and nano-structured electrode materials for smart textile applications.
-      
-    </div>
-  </section>
+      </div>
+    </section>
+  </main>
 
   <script>
     function toggleChronology() {
-      const chrono = document.getElementById('chronology');
+      const chrono = document.getElementById('chronology-content');
       chrono.style.display = chrono.style.display === 'none' || chrono.style.display === '' ? 'block' : 'none';
     }
   </script>
