@@ -63,23 +63,6 @@
       height: 16px;
     }
 
-    .chronology-content {
-      display: none;
-      margin-top: 1rem;
-      white-space: pre-wrap;
-    }
-
-    .chronology-title {
-      text-align: center;
-      font-size: 1.5rem;
-      margin-top: 2rem;
-      cursor: pointer;
-    }
-
-    .chronology-title:hover {
-      text-decoration: underline;
-    }
-
     /* 侧边导航栏 */
     .sidebar {
       position: fixed;
@@ -93,6 +76,7 @@
       flex-direction: column;
       gap: 1rem;
       z-index: 1000;
+      transition: left 0.3s;
     }
 
     .sidebar a {
@@ -113,10 +97,47 @@
       margin-left: 220px;
     }
 
+    /* Hamburger 按钮 */
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      font-size: 2rem;
+      color: #fff;
+      z-index: 1100;
+      cursor: pointer;
+    }
+
+    /* 回到顶部按钮 */
+    #back-to-top {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #4da3ff;
+      color: #000;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    /* 移动端样式 */
     @media screen and (max-width: 768px) {
       .sidebar {
-        display: none;
+        left: -220px; /* 初始隐藏 */
       }
+
+      .sidebar.show {
+        left: 0;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
       main {
         margin-left: 0;
       }
@@ -124,6 +145,12 @@
   </style>
 </head>
 <body>
+  <!-- Hamburger 按钮 -->
+  <div class="hamburger" onclick="toggleMobileMenu()">☰</div>
+
+  <!-- 回到顶部按钮 -->
+  <button id="back-to-top" onclick="scrollToTop()">↑ Top</button>
+
   <!-- 侧边导航栏 -->
   <div class="sidebar">
     <a href="#education">Education</a>
@@ -154,37 +181,36 @@
     </section>
 
     <section id="contact">
-  <h2>Contact</h2>
-  <div class="contact-item">
-    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="email">
-    <a href="mailto:kai-ting.wang@outlook.com">kai-ting.wang@outlook.com</a>
-  </div>
-  <div class="contact-item">
-    <img src="https://res.wx.qq.com/a/wx_fed/assets/res/NTI4MWU5.ico" alt="WeChat">
-    <span>WeChat 微信 ID: wktwkt123</span>
-  </div>
-  <div class="contact-item">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style="width:16px; height:16px;">
-    Instagram: <a href="https://www.instagram.com/kitty_exodus?igsh=OTZhOHdkc3Q2aXBo&utm_source=qr" target="_blank" rel="noopener noreferrer">kitty_exodus</a>
-  </div>
-  <div class="contact-item">
-    <span>ORCID</span>
-    <a id="cy-effective-orcid-url"
-       href="https://orcid.org/0009-0003-2399-0844"
-       target="orcid.widget"
-       rel="me noopener noreferrer"
-       style="display:inline-flex;align-items:center;gap:4px;vertical-align:middle;">
-       <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
-            style="width:0.8em;height:0.8em;"
-            alt="ORCID iD icon"/>
-       https://orcid.org/0009-0003-2399-0844
-    </a>
-  </div>
-  <div class="contact-item">
-    Web of Science ResearcherID: <a href="https://www.webofscience.com/wos/author/record/MTD-6721-2025" target="_blank" rel="noopener noreferrer">MTD-6721-2025</a>
-  </div>
-</section>
-
+      <h2>Contact</h2>
+      <div class="contact-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="email">
+        <a href="mailto:kai-ting.wang@outlook.com">kai-ting.wang@outlook.com</a>
+      </div>
+      <div class="contact-item">
+        <img src="https://res.wx.qq.com/a/wx_fed/assets/res/NTI4MWU5.ico" alt="WeChat">
+        <span>WeChat 微信 ID: wktwkt123</span>
+      </div>
+      <div class="contact-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style="width:16px; height:16px;">
+        Instagram: <a href="https://www.instagram.com/kitty_exodus?igsh=OTZhOHdkc3Q2aXBo&utm_source=qr" target="_blank" rel="noopener noreferrer">kitty_exodus</a>
+      </div>
+      <div class="contact-item">
+        <span>ORCID</span>
+        <a id="cy-effective-orcid-url"
+           href="https://orcid.org/0009-0003-2399-0844"
+           target="orcid.widget"
+           rel="me noopener noreferrer"
+           style="display:inline-flex;align-items:center;gap:4px;vertical-align:middle;">
+           <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
+                style="width:0.8em;height:0.8em;"
+                alt="ORCID iD icon"/>
+           https://orcid.org/0009-0003-2399-0844
+        </a>
+      </div>
+      <div class="contact-item">
+        Web of Science ResearcherID: <a href="https://www.webofscience.com/wos/author/record/MTD-6721-2025" target="_blank" rel="noopener noreferrer">MTD-6721-2025</a>
+      </div>
+    </section>
 
     <section id="publication">
       <h2>Publication</h2>
@@ -202,38 +228,26 @@
         Dr. & Mrs. YEUNG Kin Man Scholarship, 2025
       </p>
     </section>
-
-    <section>
-      <div class="chronology-title" onclick="toggleChronology()">Chronology of WANG Kaiting</div>
-      <div class="chronology-content" id="chronology-content">
-2001, Born
-In the evening of October 2nd, Tuesday, August 16th in the lunar calendar, a baby boy was born in Beijing.
-
-2008, Age 7
-In September, he entered Gonghua Central Primary School (巩华中心小学) in Changping District, Beijing.
-
-2014, Age 13
-He began attending Wenhui Middle School (北京市文汇中学) in Dongcheng District, Beijing. His homeroom teacher was Mrs. CHEN Jian.
-
-2017, Age 16
-He was admitted to Beijing No.5 High School (北京市第五中学) for senior high school studies. His homeroom teacher was Mr. YANG Zheng. 
-
-2020, Age 19
-He was admitted to China University of Petroleum-Beijing (中国石油大学（北京）). One year later, he transferred into the major of Machine Design, Manufacturing and Automation. His academic advisor was Mr. WANG Wenjie.
-
-2024, Age 23
-Under the guidance of Special Associate Prof. WANG Tun, his undergraduate thesis titled "Research and Design of Water-Cooling System for Directly Driven Top-Drive Main Bearing" won an national award and he obtained a Bachelor of Engineering (BEng) degree. Later this year, he enrolled in the Mechanical Engineering program at City University of Hong Kong (香港城市大學). His research focused on the application of MXene materials in supercapacitors, under the supervision of Prof. ZHANG Kaili and Pakistani scholar Dr. HUSSAIN Iftikhar.
-
-2025, Age 24
-He graduated from City University of Hong Kong with a Master of Science (MSc) in Mechanical Engineering, achieving Distinction and receiving the Dr. & Mrs. Yeung Kin Man Scholarship (100,000 HKD). In the second half of the year, he enrolled at Western University (University of Western Ontario), Canada, to pursue a PhD in Mechanical and Materials Engineering under the supervision of Dr. HaoTian Harvey Shi. His research focuses on the development of micro and nano-structured electrode materials for smart textile applications.
-      </div>
-    </section>
   </main>
 
   <script>
-    function toggleChronology() {
-      const chrono = document.getElementById('chronology-content');
-      chrono.style.display = chrono.style.display === 'none' || chrono.style.display === '' ? 'block' : 'none';
+    // 移动端折叠菜单控制
+    function toggleMobileMenu() {
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('show');
+    }
+
+    // 回到顶部按钮控制
+    const backToTopBtn = document.getElementById('back-to-top');
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
 </body>
