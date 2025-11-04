@@ -140,23 +140,36 @@
       z-index: 1100;
     }
     
-    @media screen and (max-width: 768px) {
-      .sidebar {
-        left: -220px; /* 初始隐藏 */
-      }
+ @media screen and (max-width: 768px) {
+  .sidebar {
+    left: -220px; /* 初始隐藏 */
+    padding-top: 4.5rem; /* 折叠时正常 */
+    background: rgba(20,20,20,0.38); /* 毛玻璃效果 */
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-right: 1px solid rgba(255,255,255,0.14);
+    transition: left 0.35s ease, padding-top 0.25s ease;
+  }
 
-      .sidebar.show {
-        left: 0;
-      }
+  .sidebar.show {
+    left: 0;             /* 展开 */
+    padding-top: 4.5rem; /* 下移文字，避免与汉堡重叠 */
+  }
 
-      .hamburger {
-        display: block;
-      }
+  .hamburger {
+    display: block;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    font-size: 2rem;
+    z-index: 2000;
+  }
 
-      main {
-        margin-left: 0;
-      }
-    }
+  main {
+    margin-left: 0; /* 移动端主内容不侧移 */
+  }
+}
+
   </style>
 </head>
 <body>
