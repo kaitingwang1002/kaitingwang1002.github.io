@@ -25,7 +25,7 @@
     header img {
       width: 150px;
       height: 150px;
-      border-radius: 50%;
+      border-radius: 15px;
       object-fit: cover;
     }
 
@@ -78,6 +78,30 @@
 
     .chronology-title:hover {
       text-decoration: underline;
+    }
+
+        .photo-container {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .photo-container img {
+      width: 150px;
+      height: 150px;
+      border-radius: 15px;
+      object-fit: cover;
+    }
+    
+    .photo-caption {
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      font-size: 10px;
+      color: rgba(255,255,255,0.75);
+      background: rgba(0,0,0,0.4);
+      padding: 2px 6px;
+      border-radius: 4px;
+      pointer-events: none;
     }
 
     /* 侧边导航栏 */
@@ -190,21 +214,19 @@
 
   <!-- 主内容区域 -->
   <main>
-    <header>
-      <img src="photo.jpg" alt="Kaiting Wang">
+   <header>
+  <div class="photo-container">
+    <img src="photo.jpg" alt="Kaiting Wang">
+    <div class="photo-caption">Dalian, China · April 2024</div>
+  </div>
+     
       <h1>Kaiting Wang 王恺霆</h1>
       <p>Hello 哈囉 您好<br>
       This is the Personal Website of Kaiting Wang. 呢個係王愷霆嘅個人網站嚟㗎。这是王恺霆的个人网页。<br>
       Fancy meeting you here! 好開心你嚟到呢度！很高兴你来到这里！</p>
     </header>
 
-    <iframe data-testid="embed-iframe" style="border-radius:12px"
-      src="https://open.spotify.com/embed/track/3qFJpsQaOGkea5MLxbk9Jc?utm_source=generator"
-      width="70%" height="152" frameBorder="0" allowfullscreen=""
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen;
-      picture-in-picture" loading="lazy"
-      style="display:block; margin: 2rem auto; border-radius:12px;"
-      ></iframe>
+    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3qFJpsQaOGkea5MLxbk9Jc?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     
     <section id="education">
       <h2>Education</h2>
@@ -323,7 +345,7 @@ He graduated from City University of Hong Kong with a Master of Science (MSc) in
       <div style="width: 50px; height: 1px; background: rgba(255,255,255,0.1); margin: 0 auto 1rem auto;"></div>
       <p style="font-size: 0.85rem; color: #666;">
         Last Update: 31 March 2026<br>
-        &copy; 2025 Wang Kaiting. All rights reserved.
+        &copy; 2026 Wang Kaiting. All rights reserved.
       </p>
     </footer>
   </main>
