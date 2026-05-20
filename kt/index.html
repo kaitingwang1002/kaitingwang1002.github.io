@@ -1,1 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaiting Wang's Personal Website | 王愷霆嘅個人網站 | 王恺霆的个人网页</title>
+  <style>
+    html {
+      scroll-behavior: smooth; /* 平滑滚动 */
+    }
 
+    body {
+      margin: 0;
+      font-family: Aptos, PMingLiU, sans-serif;
+      background-color: #000;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 2rem;
+      text-align: center;
+    }
+
+
+    h1 {
+      margin-top: 1rem;
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+    }
+
+    a {
+      color: #4da3ff;
+      text-decoration: underline;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0.5rem 0;
+    }
+
+    .contact-item img {
+      width: 16px;
+      height: 16px;
+    }
+
+    .chronology-content {
+      display: none;
+      margin-top: 1rem;
+      white-space: pre-wrap;
+    }
+
+    .chronology-title {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      cursor: pointer;
+    }
+
+    .chronology-title:hover {
+      text-decoration: underline;
+    }
+
+        .photo-container {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .photo-container img {
+      width: 300px;
+      height: 300px;
+      border-radius: 20px;
+      object-fit: cover;
+    }
+    
+    .photo-caption {
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      font-size: 10px;
+      color: rgba(255,255,255,0.75);
+      background: rgba(0,0,0,0.4);
+      padding: 2px 6px;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    /* 侧边导航栏 */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 200px;
+      background-color: #111;
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      z-index: 1000;
+    }
+
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+
+    .sidebar a:hover {
+      background-color: #4da3ff;
+      color: #000;
+      border-radius: 4px;
+    }
+
+    /* 主内容区域 */
+    main {
+      margin-left: 220px;
+    }
+
+    /* Hamburger 按钮 */
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      font-size: 2rem;
+      color: #fff;
+      z-index: 1100;
+      cursor: pointer;
+    }
+
+    /* 回到顶部按钮 */
+    #back-to-top {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #4da3ff;
+      color: #000;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      z-index: 1100;
+    }
+    
+ @media screen and (max-width: 768px) {
+  .sidebar {
+    left: -220px; /* 初始隐藏 */
+    padding-top: 4.5rem; /* 折叠时正常 */
+    background: rgba(20,20,20,0.38); /* 毛玻璃效果 */
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-right: 1px solid rgba(255,255,255,0.14);
+    transition: left 0.35s ease, padding-top 0.25s ease;
+  }
+
+  .sidebar.show {
+    left: 0;             /* 展开 */
+    padding-top: 4.5rem; /* 下移文字，避免与汉堡重叠 */
+  }
+
+  .hamburger {
+    display: block;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    font-size: 2rem;
+    z-index: 2000;
+  }
+
+  main {
+    margin-left: 0; /* 移动端主内容不侧移 */
+  }
+}
+
+  </style>
+</head>
+<body>
+
+ <!-- Hamburger 按钮 -->
+  <div class="hamburger" onclick="toggleMobileMenu()">☰</div>
+
+  <!-- 回到顶部按钮 -->
+  <button id="back-to-top" onclick="scrollToTop()">↑ Top</button>
+  
+  <!-- 侧边导航栏 -->
+  <div class="sidebar">
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+    <a href="#publications">Publications</a>
+    <a href="#honors">Honors & Awards</a>
+  </div>
+
+  <!-- 主内容区域 -->
+  <main>
+   <header>
+  <div class="photo-container">
+    <img src="/photo/photo.jpg" alt="Kaiting Wang">
+    <div class="photo-caption">Dalian, China · April 2024</div>
+  </div>
+     
+      <h1>Kaiting Wang 王恺霆</h1>
+      <p>Hello 哈囉 您好<br>
+      This is the Personal Website of Kaiting Wang. 呢個係王愷霆嘅個人網站嚟㗎。这是王恺霆的个人网页。<br>
+      Fancy meeting you here! 好開心你嚟到呢度！很高兴你来到这里！</p>
+    </header>
+
+    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3qFJpsQaOGkea5MLxbk9Jc?utm_source=generator&theme=0" width="98%" height="298" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    
+    <section id="education">
+      <h2>Education</h2>
+      <p>2020.09 – 2024.06<br>
+      China University of Petroleum-Beijing, China<br>
+      Bachelor of Engineering (BEng) in Machine Design, Manufacturing and Automation</p>
+      <p>2024.08 – 2025.11<br>
+      City University of Hong Kong (CityU), Hong Kong<br>
+      Master of Science (MSc) in Mechanical Engineering with Distinction<br>
+      Research direction: Supercapacitors, Two-dimensional Materials, MXenes.</p>
+      <p>2025.09 – 2029<br>
+      Western University (The University of Western Ontario), Canada<br>
+      Doctor of Philosophy (PhD) Student in Mechanical and Materials Engineering<br>
+      Research direction: Development of Micro and Nano-structured Electrode Materials for Smart Textile Applications.</p>
+    </section>
+
+    <section id="contact">
+  <h2>Contact</h2>
+  <div class="contact-item">
+    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="email">
+    <a href="mailto:kai-ting.wang@outlook.com">kai-ting.wang@outlook.com</a>
+  </div>
+      
+  <div class="contact-item">
+    <img src="https://res.wx.qq.com/a/wx_fed/assets/res/NTI4MWU5.ico" alt="WeChat">
+    <span>WeChat 微信 ID: wktwkt123</span>
+  </div>
+  <div class="contact-item">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style="width:16px; height:16px;">
+    Instagram: <a href="https://www.instagram.com/kitty_exodus?igsh=OTZhOHdkc3Q2aXBo&utm_source=qr" target="_blank" rel="noopener noreferrer">kitty_exodus</a>
+  </div>
+
+  <div class="contact-item">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" style="width:16px; height:16px;">
+    <a href="https://www.linkedin.com/in/kaiting-wang-417088344" 
+       target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
+      
+  <div class="contact-item">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg" alt="Google Scholar" style="width:16px; height:16px;">
+     <span>Google Scholar</span>
+    <a href="https://scholar.google.com.hk/citations?user=wmP9ShkAAAAJ&hl=en" 
+       target="_blank" rel="noopener noreferrer">Profile</a>
+  </div>
+
+      
+  <div class="contact-item">
+    <span>ORCID</span>
+    <a id="cy-effective-orcid-url"
+       href="https://orcid.org/0009-0003-2399-0844"
+       target="orcid.widget"
+       rel="me noopener noreferrer"
+       style="display:inline-flex;align-items:center;gap:4px;vertical-align:middle;">
+       <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
+            style="width:0.8em;height:0.8em;"
+            alt="ORCID iD icon"/>
+       https://orcid.org/0009-0003-2399-0844
+    </a>
+  </div>
+  <div class="contact-item">
+    Web of Science ResearcherID: <a href="https://www.webofscience.com/wos/author/record/MTD-6721-2025" target="_blank" rel="noopener noreferrer">MTD-6721-2025</a>
+  </div>
+</section>
+
+
+    <section id="publications">
+      <h2>Publications</h2>
+      <p>Wang, K., Hussain, I., Singh, K., & Zhang, K. (2025). Fabrication of MXene films through various techniques: a mini review. Nanoscale, 17(26), 15676-15689.
+      <a href="https://doi.org/10.1039/D5NR01272D" target="_blank" rel="noopener noreferrer">https://doi.org/10.1039/D5NR01272D</a></p>
+      <p>Hussain, I., Tamang, T. L., Islam, M. N., Wang, K., Singh, K., Baek, K. H., ... & Zhang, K. (2026). Stretchable MXenes for Supercapacitors: A Review. The Chemical Record, e202500199.
+      <a href="https://doi.org/10.1002/tcr.202500199" target="_blank" rel="noopener noreferrer">https://doi.org/10.1002/tcr.202500199</a></p>
+      <p>Wang, K., Qi, E., Song, X., Ghamarinia, M., Quiquero, D., Zhao, Y., & Shi, H. H. (2026). Zinc-Ion Batteries Beyond the Lab: Recent Progress on Cold-Climate Operation and Real-World Feasibility. ACS Applied Energy Materials, 9(7), 3664–3689.
+      <a href="https://doi.org/10.1021/acsaem.5c03959" target="_blank" rel="noopener noreferrer">https://doi.org/10.1021/acsaem.5c03959</a></p>
+      <p>Quiquero, D., Noroozi, R., Wang, K., Conliffe, R., & Shi, H. H. (2026). Evolving Beyond Nature: AI-Driven Rapid Advancements of Bio-Inspired Electronic Skin. ACS Applied Materials & Interfaces, 18(13), 18625-18657.
+      <a href="https://doi.org/10.1021/acsami.5c24192" target="_blank" rel="noopener noreferrer">https://doi.org/10.1021/acsami.5c24192</a></p>
+    </section>
+
+    <section id="honors">
+      <h2>Honors & Awards</h2>
+      <p style="text-align:center;">
+        China University of Petroleum-Beijing Merit Student & Scholarship, 2021, 2023.<br>
+        Provincial First Prize in the National College Student Financial Challenge, 2022.<br>
+        Prize in National “Jing Diao Cup” Graduation Design Competition, 2024.<br>
+        Be Invited to Global University Presidents & Leaders Summit, 2024.<br>
+        Dr. & Mrs. YEUNG Kin Man Scholarship ($100,000 HKD), 2025
+      </p>
+    </section>
+
+    <section>
+      <div class="chronology-title" onclick="toggleChronology()">Chronology of WANG Kaiting</div>
+      <div class="chronology-content" id="chronology-content">
+2001, Born
+In the evening of October 2nd, Tuesday, August 16th in the lunar calendar, a baby boy was born in Beijing, China.
+
+2008, Age 7
+In September, he entered Gonghua Central Primary School (巩华中心小学) in Changping District, Beijing.
+
+2014, Age 13
+He began attending Wenhui Middle School (北京市文汇中学) in Dongcheng District, Beijing. His homeroom teacher was Mrs. CHEN Jian.
+
+2017, Age 16
+He was admitted to Beijing No.5 High School (北京市第五中学) for senior high school studies. His homeroom teacher was Mr. YANG Zheng. 
+
+2020, Age 19
+He was admitted to China University of Petroleum-Beijing (中国石油大学（北京）). One year later, he transferred into the major of Machine Design, Manufacturing and Automation. His academic advisor was Mr. WANG Wenjie.
+
+2024, Age 23
+Under the guidance of Special Associate Prof. WANG Tun, his undergraduate thesis titled "Research and Design of Water-Cooling System for Directly Driven Top-Drive Main Bearing" won an national award and he obtained a Bachelor of Engineering (BEng) degree. Later this year, he enrolled in the Mechanical Engineering program at City University of Hong Kong (香港城市大學). His research focused on the application of MXene materials in supercapacitors, under the supervision of Prof. ZHANG Kaili and Researcher Dr. HUSSAIN Iftikhar.
+
+2025, Age 24
+He graduated from City University of Hong Kong with a Master of Science (MSc) in Mechanical Engineering, achieving Distinction and receiving the Dr. & Mrs. Yeung Kin Man Scholarship. In the second half of the year, he enrolled at Western University (University of Western Ontario), London, ON, Canada, to pursue a PhD in Mechanical and Materials Engineering under the supervision of Prof. HaoTian Harvey Shi. His research focuses on the development of micro and nano-structured electrode materials for smart textile applications.
+      </div>
+    </section>
+
+    <footer style="text-align: center; margin-top: 2rem; padding-bottom: 2rem;">
+      <div style="width: 50px; height: 1px; background: rgba(255,255,255,0.1); margin: 0 auto 1rem auto;"></div>
+      <p style="font-size: 0.85rem; color: #666;">
+        Last Update: 26 April 2026<br>
+        &copy; 2026 WANG Kaiting. All rights reserved.
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    function toggleChronology() {
+      const chrono = document.getElementById('chronology-content');
+      chrono.style.display = chrono.style.display === 'none' || chrono.style.display === '' ? 'block' : 'none';
+    }
+
+        // 移动端折叠菜单控制
+    function toggleMobileMenu() {
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('show');
+    }
+
+    // 回到顶部按钮控制
+    const backToTopBtn = document.getElementById('back-to-top');
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
