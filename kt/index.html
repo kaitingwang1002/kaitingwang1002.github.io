@@ -5,97 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kaiting Wang's Personal Website | 王愷霆嘅個人網站 | 王恺霆的个人网页</title>
   <style>
+    /* 全局变量与基础样式 */
+    :root {
+      --bg-color: #000000;
+      --sidebar-bg: #111111;
+      --text-color: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.75);
+      --accent-color: #4da3ff;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --font-family: Aptos, PMingLiU, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
     html {
       scroll-behavior: smooth; /* 平滑滚动 */
     }
 
     body {
       margin: 0;
-      font-family: Aptos, PMingLiU, sans-serif;
-      background-color: #000;
-      color: #fff;
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-color);
       line-height: 1.6;
-    }
-
-    header {
-      padding: 2rem;
-      text-align: center;
-    }
-
-
-    h1 {
-      margin-top: 1rem;
-      font-size: 2rem;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      margin-top: 3rem;
-      text-align: center;
-    }
-
-    section {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 1rem 2rem;
-    }
-
-    a {
-      color: #4da3ff;
-      text-decoration: underline;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin: 0.5rem 0;
-    }
-
-    .contact-item img {
-      width: 16px;
-      height: 16px;
-    }
-
-    .chronology-content {
-      display: none;
-      margin-top: 1rem;
-      white-space: pre-wrap;
-    }
-
-    .chronology-title {
-      text-align: center;
-      font-size: 1.5rem;
-      margin-top: 2rem;
-      cursor: pointer;
-    }
-
-    .chronology-title:hover {
-      text-decoration: underline;
-    }
-
-        .photo-container {
-      position: relative;
-      display: inline-block;
-    }
-    
-    .photo-container img {
-      width: 300px;
-      height: 300px;
-      border-radius: 20px;
-      object-fit: cover;
-    }
-    
-    .photo-caption {
-      position: absolute;
-      bottom: 6px;
-      right: 8px;
-      font-size: 10px;
-      color: rgba(255,255,255,0.75);
-      background: rgba(0,0,0,0.4);
-      padding: 2px 6px;
-      border-radius: 4px;
-      pointer-events: none;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* 侧边导航栏 */
@@ -104,31 +35,216 @@
       top: 0;
       left: 0;
       height: 100%;
-      width: 200px;
-      background-color: #111;
+      width: 220px;
+      background-color: var(--sidebar-bg);
       padding-top: 2rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.5rem;
+      border-right: 1px solid var(--border-color);
       z-index: 1000;
+      box-sizing: border-box;
+      transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .sidebar a {
-      color: #fff;
+      color: var(--text-color);
       text-decoration: none;
-      padding: 0.5rem 1rem;
+      padding: 0.75rem 1.5rem;
       font-size: 1rem;
+      transition: background-color 0.2s ease, color 0.2s ease, border-radius 0.2s ease;
     }
 
-    .sidebar a:hover {
-      background-color: #4da3ff;
+    .sidebar a:hover,
+    .sidebar a:focus-visible {
+      background-color: var(--accent-color);
       color: #000;
       border-radius: 4px;
+      margin: 0 0.5rem;
+      padding: 0.75rem 1rem;
+      outline: none;
     }
 
     /* 主内容区域 */
     main {
       margin-left: 220px;
+      padding-bottom: 2rem;
+    }
+
+    header {
+      padding: 2rem 2rem 1rem 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      margin-top: 3rem;
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+
+    section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: underline;
+      transition: opacity 0.2s ease;
+    }
+
+    a:hover {
+      opacity: 0.85;
+    }
+
+    /* 照片相库横向滚动 */
+    .photo-gallery {
+      width: 100%;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 10px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.2) transparent;
+    }
+
+    .photo-gallery::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .photo-gallery::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 3px;
+    }
+
+    .photo-container {
+      position: relative;
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 20px;
+    }
+
+    .photo-container:last-child {
+      margin-right: 0;
+    }
+
+    .photo-container img {
+      width: 300px;
+      height: 300px;
+      border-radius: 20px;
+      object-fit: cover;
+      display: block;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .photo-container:hover img {
+      transform: scale(1.015);
+    }
+
+    .photo-caption {
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      font-size: 10px;
+      color: var(--text-muted);
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      padding: 2px 6px;
+      border-radius: 4px;
+      pointer-events: none;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Spotify 嵌入样式 */
+    .spotify-container {
+      max-width: 800px;
+      margin: 1.5rem auto;
+      padding: 0 2rem;
+    }
+
+    .spotify-iframe {
+      border-radius: 12px;
+      width: 98%;
+      height: 298px;
+      border: 0;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* 联系方式列表 */
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .contact-item img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    /* Chronology 折叠标题 */
+    .chronology-title {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.2s ease, text-decoration 0.2s ease;
+    }
+
+    .chronology-title:hover,
+    .chronology-title:focus-visible {
+      text-decoration: underline;
+      color: var(--accent-color);
+      outline: none;
+    }
+
+    .chronology-content {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      white-space: pre-wrap;
+      line-height: 1.7;
+    }
+
+    /* 页脚 */
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    footer .divider {
+      width: 50px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 0 auto 1rem auto;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: #666;
+      margin: 0;
     }
 
     /* Hamburger 按钮 */
@@ -139,8 +255,10 @@
       left: 10px;
       font-size: 2rem;
       color: #fff;
-      z-index: 1100;
+      z-index: 2000;
       cursor: pointer;
+      user-select: none;
+      line-height: 1;
     }
 
     /* 回到顶部按钮 */
@@ -149,78 +267,131 @@
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background-color: #4da3ff;
+      background-color: var(--accent-color);
       color: #000;
       border: none;
       padding: 0.5rem 1rem;
       border-radius: 4px;
       cursor: pointer;
       z-index: 1100;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(77, 163, 255, 0.3);
+      transition: transform 0.2s ease, background-color 0.2s ease;
     }
-    
- @media screen and (max-width: 768px) {
-  .sidebar {
-    left: -220px; /* 初始隐藏 */
-    padding-top: 4.5rem; /* 折叠时正常 */
-    background: rgba(20,20,20,0.38); /* 毛玻璃效果 */
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-right: 1px solid rgba(255,255,255,0.14);
-    transition: left 0.35s ease, padding-top 0.25s ease;
-  }
 
-  .sidebar.show {
-    left: 0;             /* 展开 */
-    padding-top: 4.5rem; /* 下移文字，避免与汉堡重叠 */
-  }
+    #back-to-top:hover {
+      transform: translateY(-2px);
+      background-color: #6bb3ff;
+    }
 
-  .hamburger {
-    display: block;
-    position: fixed;
-    top: 12px;
-    left: 12px;
-    font-size: 2rem;
-    z-index: 2000;
-  }
+    /* 移动端遮罩层 */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
 
-  main {
-    margin-left: 0; /* 移动端主内容不侧移 */
-  }
-}
+    /* 移动端响应式适配 */
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        left: -220px;
+        padding-top: 4.5rem;
+        background: rgba(20, 20, 20, 0.85);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-right: 1px solid rgba(255, 255, 255, 0.14);
+        transition: left 0.35s ease, padding-top 0.25s ease;
+      }
 
+      .sidebar.show {
+        left: 0;
+        padding-top: 4.5rem;
+      }
+
+      .sidebar-overlay.show {
+        display: block;
+        opacity: 1;
+      }
+
+      .hamburger {
+        display: block;
+        top: 12px;
+        left: 12px;
+      }
+
+      main {
+        margin-left: 0;
+      }
+
+      section {
+        padding: 1rem 1.25rem;
+      }
+
+      header {
+        padding: 1.5rem 1rem;
+      }
+
+      .spotify-container {
+        padding: 0 1.25rem;
+      }
+    }
   </style>
 </head>
 <body>
 
- <!-- Hamburger 按钮 -->
-  <div class="hamburger" onclick="toggleMobileMenu()">☰</div>
+  <!-- Hamburger 按钮 -->
+  <div class="hamburger" role="button" aria-label="Toggle navigation menu" onclick="toggleMobileMenu()">☰</div>
+
+  <!-- 移动端遮罩背景 -->
+  <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
 
   <!-- 回到顶部按钮 -->
   <button id="back-to-top" onclick="scrollToTop()">↑ Top</button>
   
   <!-- 侧边导航栏 -->
-  <div class="sidebar">
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
-    <a href="#publications">Publications</a>
-    <a href="#honors">Honors & Awards</a>
-  </div>
+  <nav class="sidebar">
+    <a href="#education" onclick="closeMobileMenu()">Education</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="#publications" onclick="closeMobileMenu()">Publications</a>
+    <a href="#honors" onclick="closeMobileMenu()">Honors & Awards</a>
+  </nav>
 
   <!-- 主内容区域 -->
   <main>
-   <header>
-  <div class="photo-container">
-    <img src="/photo/photo dalian.jpg" alt="Kaiting Wang">
-    <div class="photo-caption">Dalian, China · April 2024</div>
-  </div>
-     
+    <header>
+      <div class="photo-gallery">
+        <div class="photo-container">
+          <img src="photodalian.jpg" alt="Kaiting Wang">
+          <div class="photo-caption">Dalian, China · April 2024</div>
+        </div>
+
+        <div class="photo-container">
+          <img src="photoseoul.jpg" alt="Kaiting Wang">
+          <div class="photo-caption">Seoul, Korea · January 2025</div>
+        </div>
+        
+        <div class="photo-container">
+          <img src="phototoronto.jpg" alt="Kaiting Wang">
+          <div class="photo-caption">Toronto, Canada · December 2025</div>
+        </div>
+      </div>
+      
       <h1>Kaiting Wang 王恺霆</h1>
       <p>Hello 哈囉 您好<br>
       This is the Personal Website of Kaiting Wang. 呢個係王愷霆嘅個人網站嚟㗎。这是王恺霆的个人网页。<br>
       Fancy meeting you here! 好開心你嚟到呢度！很高兴你来到这里！</p>
     </header>
 
-    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3qFJpsQaOGkea5MLxbk9Jc?utm_source=generator&theme=0" width="98%" height="298" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <div class="spotify-container">
+      <iframe class="spotify-iframe" data-testid="embed-iframe" src="https://open.spotify.com/embed/track/3qFJpsQaOGkea5MLxbk9Jc?utm_source=generator&theme=0" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
     
     <section id="education">
       <h2>Education</h2>
@@ -238,59 +409,57 @@
     </section>
 
     <section id="contact">
-  <h2>Contact</h2>
-  <div class="contact-item">
-    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="email">
-    <a href="mailto:kai-ting.wang@outlook.com">kai-ting.wang@outlook.com</a>
-  </div>
-      
-  <div class="contact-item">
-    <img src="https://res.wx.qq.com/a/wx_fed/assets/res/NTI4MWU5.ico" alt="WeChat">
-    <span>WeChat 微信 ID: wktwkt123</span>
-  </div>
-  <div class="contact-item">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style="width:16px; height:16px;">
-    Instagram: <a href="https://www.instagram.com/kitty_exodus?igsh=OTZhOHdkc3Q2aXBo&utm_source=qr" target="_blank" rel="noopener noreferrer">kitty_exodus</a>
-  </div>
+      <h2>Contact</h2>
+      <div class="contact-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="email">
+        <a href="mailto:kai-ting.wang@outlook.com">kai-ting.wang@outlook.com</a>
+      </div>
+        
+      <div class="contact-item">
+        <img src="https://res.wx.qq.com/a/wx_fed/assets/res/NTI4MWU5.ico" alt="WeChat">
+        <span>WeChat 微信 ID: wktwkt123</span>
+      </div>
 
-  <div class="contact-item">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" style="width:16px; height:16px;">
-    <a href="https://www.linkedin.com/in/kaiting-wang-417088344" 
-       target="_blank" rel="noopener noreferrer">LinkedIn</a>
-  </div>
-      
-  <div class="contact-item">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg" alt="Google Scholar" style="width:16px; height:16px;">
-     <span>Google Scholar</span>
-    <a href="https://scholar.google.com.hk/citations?user=wmP9ShkAAAAJ&hl=en" 
-       target="_blank" rel="noopener noreferrer">Profile</a>
-  </div>
+      <div class="contact-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+        Instagram: <a href="https://www.instagram.com/kitty_exodus?igsh=OTZhOHdkc3Q2aXBo&utm_source=qr" target="_blank" rel="noopener noreferrer">kitty_exodus</a>
+      </div>
 
-      
-  <div class="contact-item">
-    <span>ORCID</span>
-    <a id="cy-effective-orcid-url"
-       href="https://orcid.org/0009-0003-2399-0844"
-       target="orcid.widget"
-       rel="me noopener noreferrer"
-       style="display:inline-flex;align-items:center;gap:4px;vertical-align:middle;">
-       <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
-            style="width:0.8em;height:0.8em;"
-            alt="ORCID iD icon"/>
-       https://orcid.org/0009-0003-2399-0844
-    </a>
-  </div>
-  <div class="contact-item">
-    Web of Science ResearcherID: <a href="https://www.webofscience.com/wos/author/record/MTD-6721-2025" target="_blank" rel="noopener noreferrer">MTD-6721-2025</a>
-  </div>
-</section>
+      <div class="contact-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+        <a href="https://www.linkedin.com/in/kaiting-wang-417088344" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+        
+      <div class="contact-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg" alt="Google Scholar">
+        <span>Google Scholar</span>
+        <a href="https://scholar.google.com.hk/citations?user=wmP9ShkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Profile</a>
+      </div>
 
+      <div class="contact-item">
+        <span>ORCID</span>
+        <a id="cy-effective-orcid-url"
+           href="https://orcid.org/0009-0003-2399-0844"
+           target="orcid.widget"
+           rel="me noopener noreferrer"
+           style="display:inline-flex;align-items:center;gap:4px;vertical-align:middle;">
+           <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
+                style="width:0.8em;height:0.8em;"
+                alt="ORCID iD icon"/>
+           https://orcid.org/0009-0003-2399-0844
+        </a>
+      </div>
+
+      <div class="contact-item">
+        Web of Science ResearcherID: <a href="https://www.webofscience.com/wos/author/record/MTD-6721-2025" target="_blank" rel="noopener noreferrer">MTD-6721-2025</a>
+      </div>
+    </section>
 
     <section id="publications">
       <h2>Publications</h2>
       <p>Wang, K., Hussain, I., Singh, K., & Zhang, K. (2025). Fabrication of MXene films through various techniques: a mini review. Nanoscale, 17(26), 15676-15689.
       <a href="https://doi.org/10.1039/D5NR01272D" target="_blank" rel="noopener noreferrer">https://doi.org/10.1039/D5NR01272D</a></p>
-      <p>Hussain, I., Tamang, T. L., Islam, M. N., Wang, K., Singh, K., Baek, K. H., ... & Zhang, K. (2026). Stretchable MXenes for Supercapacitors: A Review. The Chemical Record, e202500199.
+      <p>Hussain, I., Tamang, T. L., Islam, M. N., Wang, K., Singh, K., Baek, K. H., ... & Zhang, K. (2026). Stretchable MXenes for Supercapacitors: A Review. The Chemical Record, 26(5), e202500199.
       <a href="https://doi.org/10.1002/tcr.202500199" target="_blank" rel="noopener noreferrer">https://doi.org/10.1002/tcr.202500199</a></p>
       <p>Wang, K., Qi, E., Song, X., Ghamarinia, M., Quiquero, D., Zhao, Y., & Shi, H. H. (2026). Zinc-Ion Batteries Beyond the Lab: Recent Progress on Cold-Climate Operation and Real-World Feasibility. ACS Applied Energy Materials, 9(7), 3664–3689.
       <a href="https://doi.org/10.1021/acsaem.5c03959" target="_blank" rel="noopener noreferrer">https://doi.org/10.1021/acsaem.5c03959</a></p>
@@ -310,7 +479,7 @@
     </section>
 
     <section>
-      <div class="chronology-title" onclick="toggleChronology()">Chronology of WANG Kaiting</div>
+      <div class="chronology-title" id="chronology-toggle" role="button" tabindex="0" onclick="toggleChronology()" onkeydown="handleChronologyKey(event)">Chronology of WANG Kaiting</div>
       <div class="chronology-content" id="chronology-content">
 2001, Born
 In the evening of October 2nd, Tuesday, August 16th in the lunar calendar, a baby boy was born in Beijing, China.
@@ -335,25 +504,43 @@ He graduated from City University of Hong Kong with a Master of Science (MSc) in
       </div>
     </section>
 
-    <footer style="text-align: center; margin-top: 2rem; padding-bottom: 2rem;">
-      <div style="width: 50px; height: 1px; background: rgba(255,255,255,0.1); margin: 0 auto 1rem auto;"></div>
-      <p style="font-size: 0.85rem; color: #666;">
-        Last Update: 26 April 2026<br>
+    <footer>
+      <div class="divider"></div>
+      <p>
+        Last Update: 20 May 2026<br>
         &copy; 2026 WANG Kaiting. All rights reserved.
       </p>
     </footer>
   </main>
 
   <script>
+    // Chronology 折叠控制（支持点击与键盘 Enter/Space 操作）
     function toggleChronology() {
       const chrono = document.getElementById('chronology-content');
-      chrono.style.display = chrono.style.display === 'none' || chrono.style.display === '' ? 'block' : 'none';
+      const isHidden = chrono.style.display === 'none' || chrono.style.display === '';
+      chrono.style.display = isHidden ? 'block' : 'none';
     }
 
-        // 移动端折叠菜单控制
+    function handleChronologyKey(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleChronology();
+      }
+    }
+
+    // 移动端折叠菜单与遮罩层控制
     function toggleMobileMenu() {
       const sidebar = document.querySelector('.sidebar');
+      const overlay = document.querySelector('.sidebar-overlay');
       sidebar.classList.toggle('show');
+      overlay.classList.toggle('show');
+    }
+
+    function closeMobileMenu() {
+      const sidebar = document.querySelector('.sidebar');
+      const overlay = document.querySelector('.sidebar-overlay');
+      sidebar.classList.remove('show');
+      overlay.classList.remove('show');
     }
 
     // 回到顶部按钮控制
@@ -365,6 +552,7 @@ He graduated from City University of Hong Kong with a Master of Science (MSc) in
         backToTopBtn.style.display = "none";
       }
     };
+
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
