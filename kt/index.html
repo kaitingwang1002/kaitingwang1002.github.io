@@ -6,22 +6,28 @@
   <title>Kaiting Wang's Personal Website | 王愷霆嘅個人網站 | 王恺霆的个人网页</title>
   <style>
     /* -------------------------------------------------------------------------- */
-    /* 核心视觉变量与高端深色调 Palette                                          */
-    /* 结合 emil-design-eng 设计工程哲学：微光、高对比阶梯、手感微交互与质感边框    */
+    /* 全局系统设计变量 (System Design Tokens)                                    */
+    /* 严格遵循 emil-design-eng 设计工程哲学：极致光感、高分辨字排与触控手感       */
     /* -------------------------------------------------------------------------- */
     :root {
-      --bg-color: #0b0b0e;            /* 深邃底色，消除纯黑刺眼感 */
-      --card-bg: rgba(255, 255, 255, 0.03);
-      --card-bg-hover: rgba(255, 255, 255, 0.06);
-      --sidebar-bg: #121216;
-      --text-main: #f4f4f5;          /* 高清晰度主文字 */
-      --text-muted: #a1a1aa;         /* 柔和次要字 */
-      --text-subtle: #71717a;        /* 辅助补充文字 */
-      --accent-color: #3b82f6;       /* 电光蓝 Accent */
-      --accent-hover: #60a5fa;
-      --border-color: rgba(255, 255, 255, 0.08);
-      --border-hover: rgba(255, 255, 255, 0.2);
-      --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Aptos, PMingLiU, sans-serif;
+      --bg-color: #08080a;                  /* 极深质感底色 */
+      --sidebar-bg: #101014;                /* 导航栏专属暗色 */
+      --card-bg: rgba(255, 255, 255, 0.025); /* 微光半透明卡片背景 */
+      --card-bg-hover: rgba(255, 255, 255, 0.05);
+      
+      --text-main: #f4f4f5;                /* 主文字 (Zinc-100) */
+      --text-muted: #a1a1aa;               /* 次要字 (Zinc-400) */
+      --text-subtle: #71717a;              /* 辅助字 (Zinc-500) */
+      
+      --accent-color: #3b82f6;             /* 电光蓝 Accent */
+      --accent-hover: #60a5fa;             /* Hover 浅电光蓝 */
+      --accent-bg: rgba(59, 130, 246, 0.1);/* Accent 浅背景 */
+      
+      --border-color: rgba(255, 255, 255, 0.08); /* 精致微光边框 */
+      --border-hover: rgba(255, 255, 255, 0.22);
+      
+      --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter", "Segoe UI", Roboto, Aptos, PMingLiU, sans-serif;
+      
       --radius-lg: 16px;
       --radius-md: 12px;
       --radius-sm: 8px;
@@ -38,10 +44,11 @@
       color: var(--text-main);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* -------------------------------------------------------------------------- */
-    /* 侧边导航栏（Sidebar）                                                     */
+    /* 侧边导航栏（Sidebar Navigation）                                           */
     /* -------------------------------------------------------------------------- */
     .sidebar {
       position: fixed;
@@ -53,7 +60,7 @@
       padding: 2.5rem 1.25rem;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.4rem;
       border-right: 1px solid var(--border-color);
       z-index: 1000;
       box-sizing: border-box;
@@ -61,23 +68,26 @@
     }
 
     .sidebar-label {
-      font-size: 0.8rem;
-      font-weight: 600;
+      font-size: 0.75rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       color: var(--text-subtle);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.85rem;
       padding-left: 0.75rem;
     }
 
     .sidebar a {
       color: var(--text-muted);
       text-decoration: none;
-      padding: 0.75rem 1rem;
-      font-size: 0.95rem;
+      padding: 0.7rem 1rem;
+      font-size: 0.92rem;
       font-weight: 500;
       border-radius: var(--radius-sm);
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .sidebar a:hover,
@@ -93,11 +103,11 @@
     }
 
     /* -------------------------------------------------------------------------- */
-    /* 主容器（Main Content）                                                    */
+    /* 主区域布局（Main Layout）                                                 */
     /* -------------------------------------------------------------------------- */
     main {
       margin-left: 240px;
-      padding: 2.5rem 2.5rem 4rem 2.5rem;
+      padding: 2.5rem 2.5rem 5rem 2.5rem;
       max-width: 860px;
     }
 
@@ -105,14 +115,14 @@
       margin-bottom: 2.5rem;
     }
 
-    /* 头部相册横向滚动卡片 */
+    /* 头部相册横向滚动卡片（Photo Gallery） */
     .photo-gallery {
       width: 100%;
       overflow-x: auto;
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
       padding-bottom: 12px;
-      margin-bottom: 2rem;
+      margin-bottom: 2.25rem;
       scroll-snap-type: x mandatory;
       scrollbar-width: thin;
       scrollbar-color: rgba(255,255,255,0.15) transparent;
@@ -136,7 +146,7 @@
       border-radius: var(--radius-lg);
       overflow: hidden;
       border: 1px solid var(--border-color);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
     }
 
@@ -150,8 +160,8 @@
     }
 
     .photo-container img {
-      width: 300px;
-      height: 300px;
+      width: 290px;
+      height: 290px;
       border-radius: var(--radius-lg);
       object-fit: cover;
       display: block;
@@ -164,55 +174,58 @@
       font-size: 11px;
       font-weight: 500;
       color: rgba(255, 255, 255, 0.9);
-      background: rgba(18, 18, 22, 0.75);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(16, 16, 20, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       padding: 4px 10px;
       border-radius: var(--radius-sm);
       border: 1px solid rgba(255, 255, 255, 0.12);
       pointer-events: none;
     }
 
+    /* 个人主标题与问候语 */
     h1 {
-      font-size: 2.2rem;
+      font-size: 2.25rem;
       font-weight: 800;
-      letter-spacing: -0.02em;
-      margin: 0 0 0.75rem 0;
+      letter-spacing: -0.025em;
+      margin: 0 0 0.85rem 0;
       color: var(--text-main);
     }
 
     header p {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       color: var(--text-muted);
       line-height: 1.7;
       margin: 0;
     }
 
-    /* Spotify 容器卡片 */
-    .spotify-wrapper {
-      margin: 2.5rem 0;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    /* -------------------------------------------------------------------------- */
+    /* Spotify 原生嵌入控件（Native Embed without Outer Box）                     */
+    /* -------------------------------------------------------------------------- */
+    .spotify-native-wrapper {
+      margin: 2.25rem 0;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
     }
 
-    .spotify-wrapper iframe {
-      border-radius: var(--radius-md);
+    .spotify-native-wrapper iframe {
       width: 100%;
       height: 298px;
       border: 0;
       display: block;
+      border-radius: 12px;
     }
 
-    /* 章节标题 */
+    /* -------------------------------------------------------------------------- */
+    /* 章节与微光卡片体系（Section & Card Architecture）                           */
+    /* -------------------------------------------------------------------------- */
     section {
       margin-bottom: 3rem;
     }
 
     h2 {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 700;
       letter-spacing: -0.015em;
       margin-bottom: 1.25rem;
@@ -231,6 +244,29 @@
       border-radius: 2px;
     }
 
+    /* 通用统一卡片 */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem 1.6rem;
+      margin-bottom: 1.1rem;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background-color 0.25s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:hover {
+      background: var(--card-bg-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--text-main);
+      line-height: 1.65;
+    }
+
     /* 通用链接 */
     a {
       color: var(--accent-color);
@@ -243,66 +279,45 @@
       opacity: 0.9;
     }
 
-    /* 教育与荣誉经历卡片 */
-    .info-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 1rem;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+    /* 联系方式响应式网格 (Contact Grid) */
+    .contact-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.85rem;
     }
 
-    .info-card:hover {
+    .contact-card-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .contact-card-item:hover {
       background: var(--card-bg-hover);
       border-color: var(--border-hover);
       transform: translateY(-2px);
     }
 
-    .info-card p {
-      margin: 0;
-      color: var(--text-main);
-    }
-
-    /* 联系方式项目网络布局 */
-    .contact-container {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 1.25rem 1.5rem;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 0.85rem 0;
-      flex-wrap: wrap;
-    }
-
-    .contact-item:first-child {
-      margin-top: 0;
-    }
-
-    .contact-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .contact-item img {
+    .contact-card-item img {
       width: 18px;
       height: 18px;
       object-fit: contain;
       flex-shrink: 0;
     }
 
-    /* 发表论文卡片 */
+    /* 论文列表项微观调整 */
     .pub-card {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 1rem;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+      padding: 1.35rem 1.6rem;
+      margin-bottom: 1.1rem;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background-color 0.25s ease;
     }
 
     .pub-card:hover {
@@ -313,13 +328,16 @@
 
     .pub-card p {
       margin: 0;
-      line-height: 1.65;
+      line-height: 1.68;
+      color: var(--text-main);
     }
 
-    /* 个人编年史（Chronology） */
+    /* -------------------------------------------------------------------------- */
+    /* 个人编年史（Chronology Foldable Section）                                  */
+    /* -------------------------------------------------------------------------- */
     .chronology-title {
       text-align: center;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 600;
       color: var(--text-main);
       background: var(--card-bg);
@@ -329,6 +347,21 @@
       cursor: pointer;
       user-select: none;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .chronology-title::after {
+      content: "▾";
+      font-size: 1rem;
+      color: var(--accent-color);
+      transition: transform 0.25s ease;
+    }
+
+    .chronology-title.active::after {
+      transform: rotate(180deg);
     }
 
     .chronology-title:hover,
@@ -346,8 +379,8 @@
     .chronology-content {
       display: none;
       margin-top: 1rem;
-      padding: 1.5rem;
-      background: rgba(0, 0, 0, 0.4);
+      padding: 1.6rem;
+      background: rgba(0, 0, 0, 0.45);
       border-radius: var(--radius-lg);
       border: 1px solid var(--border-color);
       white-space: pre-wrap;
@@ -356,7 +389,9 @@
       font-size: 0.95rem;
     }
 
-    /* 页脚 */
+    /* -------------------------------------------------------------------------- */
+    /* 页脚与辅助控件 (Footer & Fixed Controls)                                   */
+    /* -------------------------------------------------------------------------- */
     footer {
       text-align: center;
       margin-top: 4rem;
@@ -376,11 +411,11 @@
       position: fixed;
       top: 14px;
       left: 14px;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       color: var(--text-main);
       z-index: 2000;
       cursor: pointer;
-      background: rgba(18, 18, 22, 0.85);
+      background: rgba(16, 16, 20, 0.85);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       padding: 6px 12px;
@@ -424,7 +459,7 @@
       transform: scale(0.95);
     }
 
-    /* 移动端遮罩层 */
+    /* 移动端遮罩背景 */
     .sidebar-overlay {
       display: none;
       position: fixed;
@@ -446,7 +481,7 @@
         transform: translateX(-100%);
         width: 250px;
         padding-top: 5rem;
-        background: rgba(18, 18, 22, 0.92);
+        background: rgba(16, 16, 20, 0.92);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
       }
@@ -472,6 +507,10 @@
       .photo-container img {
         width: 240px;
         height: 240px;
+      }
+
+      .contact-card-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -505,10 +544,11 @@
           <div class="photo-caption">Dalian, China · April 2024</div>
         </div>
 
-        <div class="photo-container">
+      <!--  <div class="photo-container">
           <img src="photoseoul.jpg" alt="Kaiting Wang">
           <div class="photo-caption">Seoul, Korea · January 2025</div>
         </div>
+      -->
         
         <div class="photo-container">
           <img src="phototoronto.jpg" alt="Kaiting Wang">
@@ -522,26 +562,27 @@
       Fancy meeting you here! 好開心你嚟到呢度！很高兴你来到这里！</p>
     </header>
 
-    <div class="spotify-wrapper">
-      <iframe data-testid="embed-iframe" src="https://open.spotify.com/embed/track/3qFJpsQaOGkea5MLxbk9Jc?utm_source=generator&theme=0" width="98%" height="298" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <!-- Spotify 保持原生格式，无外部多余卡片容器 -->
+    <div class="spotify-native-wrapper">
+      <iframe data-testid="embed-iframe" src="https://open.spotify.com/embed/track/3qFJpsQaOGkea5MLxbk9Jc?utm_source=generator&theme=0" width="100%" height="298" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
     
     <section id="education">
       <h2>Education</h2>
-      <div class="info-card">
+      <div class="card">
         <p>2020.09 – 2024.06<br>
         China University of Petroleum-Beijing, China<br>
         Bachelor of Engineering (BEng) in Machine Design, Manufacturing and Automation</p>
       </div>
 
-      <div class="info-card">
+      <div class="card">
         <p>2024.08 – 2025.11<br>
         City University of Hong Kong (CityU), Hong Kong<br>
         Master of Science (MSc) in Mechanical Engineering with Distinction<br>
         Research direction: Supercapacitors, Two-dimensional Materials, MXenes.</p>
       </div>
 
-      <div class="info-card">
+      <div class="card">
         <p>2025.09 – 2029<br>
         Western University (The University of Western Ontario), Canada<br>
         Doctor of Philosophy (PhD) Student in Mechanical and Materials Engineering<br>
@@ -551,34 +592,33 @@
 
     <section id="contact">
       <h2>Contact</h2>
-      <div class="contact-container">
-        <div class="contact-item">
+      <div class="contact-card-grid">
+        <div class="contact-card-item">
           <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="email">
           <a href="mailto:kai-ting.wang@outlook.com">kai-ting.wang@outlook.com</a>
         </div>
           
-        <div class="contact-item">
+        <div class="contact-card-item">
           <img src="https://res.wx.qq.com/a/wx_fed/assets/res/NTI4MWU5.ico" alt="WeChat">
           <span>WeChat 微信 ID: wktwkt123</span>
         </div>
 
-        <div class="contact-item">
+        <div class="contact-card-item">
           <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style="width:16px; height:16px;">
-          Instagram: <a href="https://www.instagram.com/kitty_exodus?igsh=OTZhOHdkc3Q2aXBo&utm_source=qr" target="_blank" rel="noopener noreferrer">kitty_exodus</a>
+          <span>Instagram: <a href="https://www.instagram.com/kitty_exodus?igsh=OTZhOHdkc3Q2aXBo&utm_source=qr" target="_blank" rel="noopener noreferrer">kitty_exodus</a></span>
         </div>
 
-        <div class="contact-item">
+        <div class="contact-card-item">
           <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" style="width:16px; height:16px;">
           <a href="https://www.linkedin.com/in/kaiting-wang-417088344" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
           
-        <div class="contact-item">
+        <div class="contact-card-item">
           <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg" alt="Google Scholar" style="width:16px; height:16px;">
-          <span>Google Scholar</span>
-          <a href="https://scholar.google.com.hk/citations?user=wmP9ShkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Profile</a>
+          <span>Google Scholar <a href="https://scholar.google.com.hk/citations?user=wmP9ShkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Profile</a></span>
         </div>
 
-        <div class="contact-item">
+        <div class="contact-card-item">
           <span>ORCID</span>
           <a id="cy-effective-orcid-url"
              href="https://orcid.org/0009-0003-2399-0844"
@@ -592,8 +632,8 @@
           </a>
         </div>
 
-        <div class="contact-item">
-          Web of Science ResearcherID: <a href="https://www.webofscience.com/wos/author/record/MTD-6721-2025" target="_blank" rel="noopener noreferrer">MTD-6721-2025</a>
+        <div class="contact-card-item" style="grid-column: 1 / -1;">
+          <span>Web of Science ResearcherID: <a href="https://www.webofscience.com/wos/author/record/MTD-6721-2025" target="_blank" rel="noopener noreferrer">MTD-6721-2025</a></span>
         </div>
       </div>
     </section>
@@ -623,7 +663,7 @@
 
     <section id="honors">
       <h2>Honors & Awards</h2>
-      <div class="info-card">
+      <div class="card">
         <p style="text-align:center;">
           China University of Petroleum-Beijing Merit Student & Scholarship, 2021, 2023.<br>
           Provincial First Prize in the National College Student Financial Challenge, 2022.<br>
@@ -672,8 +712,11 @@ He graduated from City University of Hong Kong with a Master of Science (MSc) in
     // Chronology 折叠控制
     function toggleChronology() {
       const chrono = document.getElementById('chronology-content');
+      const title = document.getElementById('chronology-toggle');
+      const isHidden = chrono.style.display === 'none' ||.getElementById('chronology-toggle');
       const isHidden = chrono.style.display === 'none' || chrono.style.display === '';
       chrono.style.display = isHidden ? 'block' : 'none';
+      title.classList.toggle('active', isHidden);
     }
 
     function handleChronologyKey(e) {
