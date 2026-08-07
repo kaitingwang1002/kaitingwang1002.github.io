@@ -6,24 +6,22 @@
   <title>Kaiting Wang's Personal Website | 王愷霆嘅個人網站 | 王恺霆的个人网页</title>
   <style>
     /* -------------------------------------------------------------------------- */
-    /* 全局系统设计变量 (System Design Tokens)                                    */
-    /* 严格遵循 emil-design-eng 设计工程哲学：极致光感、高分辨字排与触控手感       */
+    /* 设计 Token 与系统定义                                                     */
     /* -------------------------------------------------------------------------- */
     :root {
-      --bg-color: #08080a;                  /* 极深质感底色 */
-      --sidebar-bg: #101014;                /* 导航栏专属暗色 */
-      --card-bg: rgba(255, 255, 255, 0.025); /* 微光半透明卡片背景 */
+      --bg-color: #08080a;                  /* 深邃质感底色 */
+      --sidebar-bg: #101014;                /* 导航栏背景 */
+      --card-bg: rgba(255, 255, 255, 0.025); /* 统一卡片背景 */
       --card-bg-hover: rgba(255, 255, 255, 0.05);
       
-      --text-main: #f4f4f5;                /* 主文字 (Zinc-100) */
-      --text-muted: #a1a1aa;               /* 次要字 (Zinc-400) */
-      --text-subtle: #71717a;              /* 辅助字 (Zinc-500) */
+      --text-main: #f4f4f5;                /* 主文字 */
+      --text-muted: #a1a1aa;               /* 次要文字 */
+      --text-subtle: #71717a;              /* 辅助文字 */
       
-      --accent-color: #3b82f6;             /* 电光蓝 Accent */
-      --accent-hover: #60a5fa;             /* Hover 浅电光蓝 */
-      --accent-bg: rgba(59, 130, 246, 0.1);/* Accent 浅背景 */
+      --accent-color: #3b82f6;             /* 高亮电光蓝 */
+      --accent-hover: #60a5fa;
       
-      --border-color: rgba(255, 255, 255, 0.08); /* 精致微光边框 */
+      --border-color: rgba(255, 255, 255, 0.08); /* 统一微光边框 */
       --border-hover: rgba(255, 255, 255, 0.22);
       
       --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter", "Segoe UI", Roboto, Aptos, PMingLiU, sans-serif;
@@ -103,7 +101,7 @@
     }
 
     /* -------------------------------------------------------------------------- */
-    /* 主区域布局（Main Layout）                                                 */
+    /* 主内容布局（Main Layout）                                                 */
     /* -------------------------------------------------------------------------- */
     main {
       margin-left: 240px;
@@ -115,7 +113,7 @@
       margin-bottom: 2.5rem;
     }
 
-    /* 头部相册横向滚动卡片（Photo Gallery） */
+    /* 相册卡片滚动 */
     .photo-gallery {
       width: 100%;
       overflow-x: auto;
@@ -183,7 +181,6 @@
       pointer-events: none;
     }
 
-    /* 个人主标题与问候语 */
     h1 {
       font-size: 2.25rem;
       font-weight: 800;
@@ -200,16 +197,14 @@
     }
 
     /* -------------------------------------------------------------------------- */
-    /* Spotify 原生嵌入控件（Native Embed without Outer Box）                     */
+    /* Spotify 控件原生格式（Native Format, No Wrapper Box）                    */
     /* -------------------------------------------------------------------------- */
-    .spotify-native-wrapper {
+    .spotify-wrapper {
       margin: 2.25rem 0;
       width: 100%;
-      border-radius: 12px;
-      overflow: hidden;
     }
 
-    .spotify-native-wrapper iframe {
+    .spotify-wrapper iframe {
       width: 100%;
       height: 298px;
       border: 0;
@@ -218,7 +213,7 @@
     }
 
     /* -------------------------------------------------------------------------- */
-    /* 章节与微光卡片体系（Section & Card Architecture）                           */
+    /* 章节与卡片样式（Sections & Uniform Card Styling）                         */
     /* -------------------------------------------------------------------------- */
     section {
       margin-bottom: 3rem;
@@ -244,7 +239,7 @@
       border-radius: 2px;
     }
 
-    /* 通用统一卡片 */
+    /* 统一规范卡片 */
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
@@ -264,10 +259,47 @@
     .card p {
       margin: 0;
       color: var(--text-main);
-      line-height: 1.65;
+      line-height: 1.68;
     }
 
-    /* 通用链接 */
+    /* 统一通用的 Contact 卡片容器（解决奇数条目拉伸错位问题） */
+    .contact-card-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem 1.6rem;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+    }
+
+    .contact-card-box:hover {
+      background: var(--card-bg-hover);
+      border-color: var(--border-hover);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0.85rem 0;
+      flex-wrap: wrap;
+    }
+
+    .contact-item:first-child {
+      margin-top: 0;
+    }
+
+    .contact-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-item img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    /* 链接样式 */
     a {
       color: var(--accent-color);
       text-decoration: underline;
@@ -279,61 +311,8 @@
       opacity: 0.9;
     }
 
-    /* 联系方式响应式网格 (Contact Grid) */
-    .contact-card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 0.85rem;
-    }
-
-    .contact-card-item {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 0.9rem 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .contact-card-item:hover {
-      background: var(--card-bg-hover);
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-    }
-
-    .contact-card-item img {
-      width: 18px;
-      height: 18px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-
-    /* 论文列表项微观调整 */
-    .pub-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 1.35rem 1.6rem;
-      margin-bottom: 1.1rem;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background-color 0.25s ease;
-    }
-
-    .pub-card:hover {
-      background: var(--card-bg-hover);
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-    }
-
-    .pub-card p {
-      margin: 0;
-      line-height: 1.68;
-      color: var(--text-main);
-    }
-
     /* -------------------------------------------------------------------------- */
-    /* 个人编年史（Chronology Foldable Section）                                  */
+    /* Chronology 折叠区域（基于类名的完全修复版）                               */
     /* -------------------------------------------------------------------------- */
     .chronology-title {
       text-align: center;
@@ -387,6 +366,13 @@
       line-height: 1.75;
       color: var(--text-muted);
       font-size: 0.95rem;
+      opacity: 0;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .chronology-content.show {
+      display: block;
+      opacity: 1;
     }
 
     /* -------------------------------------------------------------------------- */
@@ -508,10 +494,6 @@
         width: 240px;
         height: 240px;
       }
-
-      .contact-card-grid {
-        grid-template-columns: 1fr;
-      }
     }
   </style>
 </head>
@@ -544,11 +526,12 @@
           <div class="photo-caption">Dalian, China · April 2024</div>
         </div>
 
-      <!--  <div class="photo-container">
+        <!--
+        <div class="photo-container">
           <img src="photoseoul.jpg" alt="Kaiting Wang">
           <div class="photo-caption">Seoul, Korea · January 2025</div>
         </div>
-      -->
+        -->
         
         <div class="photo-container">
           <img src="phototoronto.jpg" alt="Kaiting Wang">
@@ -562,9 +545,9 @@
       Fancy meeting you here! 好開心你嚟到呢度！很高兴你来到这里！</p>
     </header>
 
-    <!-- Spotify 保持原生格式，无外部多余卡片容器 -->
-    <div class="spotify-native-wrapper">
-      <iframe data-testid="embed-iframe" src="https://open.spotify.com/embed/track/3qFJpsQaOGkea5MLxbk9Jc?utm_source=generator&theme=0" width="100%" height="298" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <!-- Spotify 原生格式嵌入（无额外包裹框，原汁原味） -->
+    <div class="spotify-wrapper">
+      <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3qFJpsQaOGkea5MLxbk9Jc?utm_source=generator&theme=0" width="98%" height="298" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
     
     <section id="education">
@@ -592,33 +575,34 @@
 
     <section id="contact">
       <h2>Contact</h2>
-      <div class="contact-card-grid">
-        <div class="contact-card-item">
+      <div class="contact-card-box">
+        <div class="contact-item">
           <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="email">
           <a href="mailto:kai-ting.wang@outlook.com">kai-ting.wang@outlook.com</a>
         </div>
           
-        <div class="contact-card-item">
+        <div class="contact-item">
           <img src="https://res.wx.qq.com/a/wx_fed/assets/res/NTI4MWU5.ico" alt="WeChat">
           <span>WeChat 微信 ID: wktwkt123</span>
         </div>
 
-        <div class="contact-card-item">
+        <div class="contact-item">
           <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style="width:16px; height:16px;">
-          <span>Instagram: <a href="https://www.instagram.com/kitty_exodus?igsh=OTZhOHdkc3Q2aXBo&utm_source=qr" target="_blank" rel="noopener noreferrer">kitty_exodus</a></span>
+          Instagram: <a href="https://www.instagram.com/kitty_exodus?igsh=OTZhOHdkc3Q2aXBo&utm_source=qr" target="_blank" rel="noopener noreferrer">kitty_exodus</a>
         </div>
 
-        <div class="contact-card-item">
+        <div class="contact-item">
           <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" style="width:16px; height:16px;">
           <a href="https://www.linkedin.com/in/kaiting-wang-417088344" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
           
-        <div class="contact-card-item">
+        <div class="contact-item">
           <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg" alt="Google Scholar" style="width:16px; height:16px;">
-          <span>Google Scholar <a href="https://scholar.google.com.hk/citations?user=wmP9ShkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Profile</a></span>
+          <span>Google Scholar</span>
+          <a href="https://scholar.google.com.hk/citations?user=wmP9ShkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Profile</a>
         </div>
 
-        <div class="contact-card-item">
+        <div class="contact-item">
           <span>ORCID</span>
           <a id="cy-effective-orcid-url"
              href="https://orcid.org/0009-0003-2399-0844"
@@ -632,30 +616,30 @@
           </a>
         </div>
 
-        <div class="contact-card-item" style="grid-column: 1 / -1;">
-          <span>Web of Science ResearcherID: <a href="https://www.webofscience.com/wos/author/record/MTD-6721-2025" target="_blank" rel="noopener noreferrer">MTD-6721-2025</a></span>
+        <div class="contact-item">
+          Web of Science ResearcherID: <a href="https://www.webofscience.com/wos/author/record/MTD-6721-2025" target="_blank" rel="noopener noreferrer">MTD-6721-2025</a>
         </div>
       </div>
     </section>
 
     <section id="publications">
       <h2>Publications</h2>
-      <div class="pub-card">
+      <div class="card">
         <p>Wang, K., Hussain, I., Singh, K., & Zhang, K. (2025). Fabrication of MXene films through various techniques: a mini review. Nanoscale, 17(26), 15676-15689.
         <a href="https://doi.org/10.1039/D5NR01272D" target="_blank" rel="noopener noreferrer">https://doi.org/10.1039/D5NR01272D</a></p>
       </div>
 
-      <div class="pub-card">
+      <div class="card">
         <p>Hussain, I., Tamang, T. L., Islam, M. N., Wang, K., Singh, K., Baek, K. H., ... & Zhang, K. (2026). Stretchable MXenes for Supercapacitors: A Review. The Chemical Record, 26(5), e202500199.
         <a href="https://doi.org/10.1002/tcr.202500199" target="_blank" rel="noopener noreferrer">https://doi.org/10.1002/tcr.202500199</a></p>
       </div>
 
-      <div class="pub-card">
+      <div class="card">
         <p>Wang, K., Qi, E., Song, X., Ghamarinia, M., Quiquero, D., Zhao, Y., & Shi, H. H. (2026). Zinc-Ion Batteries Beyond the Lab: Recent Progress on Cold-Climate Operation and Real-World Feasibility. ACS Applied Energy Materials, 9(7), 3664–3689.
         <a href="https://doi.org/10.1021/acsaem.5c03959" target="_blank" rel="noopener noreferrer">https://doi.org/10.1021/acsaem.5c03959</a></p>
       </div>
 
-      <div class="pub-card">
+      <div class="card">
         <p>Quiquero, D., Noroozi, R., Wang, K., Conliffe, R., & Shi, H. H. (2026). Evolving Beyond Nature: AI-Driven Rapid Advancements of Bio-Inspired Electronic Skin. ACS Applied Materials & Interfaces, 18(13), 18625-18657.
         <a href="https://doi.org/10.1021/acsami.5c24192" target="_blank" rel="noopener noreferrer">https://doi.org/10.1021/acsami.5c24192</a></p>
       </div>
@@ -702,21 +686,19 @@ He graduated from City University of Hong Kong with a Master of Science (MSc) in
 
     <footer>
       <p>
-        Last Update: 20 May 2026<br>
+        Last Update: 7 Aug 2026<br>
         &copy; 2026 WANG Kaiting. All rights reserved.
       </p>
     </footer>
   </main>
 
   <script>
-    // Chronology 折叠控制
+    // Chronology 折叠控制（标准 Class 切换修复版）
     function toggleChronology() {
       const chrono = document.getElementById('chronology-content');
       const title = document.getElementById('chronology-toggle');
-      const isHidden = chrono.style.display === 'none' ||.getElementById('chronology-toggle');
-      const isHidden = chrono.style.display === 'none' || chrono.style.display === '';
-      chrono.style.display = isHidden ? 'block' : 'none';
-      title.classList.toggle('active', isHidden);
+      chrono.classList.toggle('show');
+      title.classList.toggle('active');
     }
 
     function handleChronologyKey(e) {
