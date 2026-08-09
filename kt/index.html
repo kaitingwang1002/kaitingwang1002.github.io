@@ -4,28 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kaiting Wang's Personal Website | 王愷霆嘅個人網站 | 王恺霆的个人网页</title>
+  
+  <!-- 搜索引擎与 Open Graph 分享元数据 -->
+  <meta name="description" content="Personal Website of Kaiting Wang (王恺霆), PhD Student in Mechanical & Materials Engineering at Western University. Research on MXenes, Smart Textiles, and Energy Storage.">
+  <meta property="og:title" content="Kaiting Wang 王恺霆 | Academic Portfolio">
+  <meta property="og:description" content="PhD Student at Western University | MXenes, Smart Textiles, Supercapacitors & Battery Energy Storage.">
+  <meta property="og:type" content="website">
+
   <style>
     /* -------------------------------------------------------------------------- */
-    /* 设计 Token 与系统定义                                                     */
+    /* 顶级学术/设计工程系统 Tokens (World-Class Academic System Tokens)             */
+    /* 借鉴 Stanford/MIT 学者主页与 Vercel/Linear 极简黑深色美学                     */
     /* -------------------------------------------------------------------------- */
     :root {
-      --bg-color: #08080a;                  /* 深邃质感底色 */
-      --sidebar-bg: #101014;                /* 导航栏背景 */
-      --card-bg: rgba(255, 255, 255, 0.025); /* 统一卡片背景 */
+      --bg-color: #070709;                   /* 深邃极简背景 */
+      --card-bg: rgba(255, 255, 255, 0.025);  /* 微光浮动卡片 */
       --card-bg-hover: rgba(255, 255, 255, 0.05);
+      --sidebar-bg: rgba(14, 14, 18, 0.85);   /* 悬浮毛玻璃导航 */
       
-      --text-main: #f4f4f5;                /* 主文字 */
-      --text-muted: #a1a1aa;               /* 次要文字 */
-      --text-subtle: #71717a;              /* 辅助文字 */
+      --text-primary: #ffffff;
+      --text-main: #f4f4f5;                 /* 主文本 (Zinc-100) */
+      --text-muted: #a1a1aa;                /* 次要文本 (Zinc-400) */
+      --text-subtle: #71717a;               /* 辅助文本 (Zinc-500) */
       
-      --accent-color: #3b82f6;             /* 高亮电光蓝 */
-      --accent-hover: #60a5fa;
+      --accent-blue: #3b82f6;               /* 学术蓝 */
+      --accent-glow: rgba(59, 130, 246, 0.15);
+      --accent-cyan: #06b6d4;               /* 前沿科技蓝绿 */
       
-      --border-color: rgba(255, 255, 255, 0.08); /* 统一微光边框 */
+      --border-color: rgba(255, 255, 255, 0.08); /* 极细微光边框 */
       --border-hover: rgba(255, 255, 255, 0.22);
       
-      --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter", "Segoe UI", Roboto, Aptos, PMingLiU, sans-serif;
+      --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Segoe UI", Roboto, Aptos, PMingLiU, sans-serif;
+      --font-mono: "SF Mono", "Fira Code", "Consolas", monospace;
       
+      --radius-xl: 20px;
       --radius-lg: 16px;
       --radius-md: 12px;
       --radius-sm: 8px;
@@ -37,90 +49,81 @@
 
     body {
       margin: 0;
-      font-family: var(--font-family);
+      font-family: var(--font-stack);
       background-color: var(--bg-color);
       color: var(--text-main);
-      line-height: 1.65;
+      line-height: 1.68;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
     /* -------------------------------------------------------------------------- */
-    /* 侧边导航栏（Sidebar Navigation）                                           */
+    /* 顶栏吸顶毛玻璃导航 (Top Sticky Glass Navbar)                              */
     /* -------------------------------------------------------------------------- */
-    .sidebar {
-      position: fixed;
+    .top-nav {
+      position: sticky;
       top: 0;
-      left: 0;
-      height: 100vh;
-      width: 240px;
-      background-color: var(--sidebar-bg);
-      padding: 2.5rem 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      border-right: 1px solid var(--border-color);
+      width: 100%;
+      background: rgba(7, 7, 9, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
       z-index: 1000;
+      padding: 0.85rem 2rem;
       box-sizing: border-box;
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .sidebar-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-subtle);
-      margin-bottom: 0.85rem;
-      padding-left: 0.75rem;
-    }
-
-    .sidebar a {
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 0.7rem 1rem;
-      font-size: 0.92rem;
-      font-weight: 500;
-      border-radius: var(--radius-sm);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: space-between;
     }
 
-    .sidebar a:hover,
-    .sidebar a:focus-visible {
-      background-color: var(--card-bg-hover);
-      color: var(--text-main);
-      transform: translateX(4px);
-      outline: none;
+    .nav-brand {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.01em;
     }
 
-    .sidebar a:active {
-      transform: scale(0.97);
+    .nav-links {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
     }
 
     /* -------------------------------------------------------------------------- */
-    /* 主内容布局（Main Layout）                                                 */
+    /* 主容器（Main Container & Hero Layout）                                    */
     /* -------------------------------------------------------------------------- */
-    main {
-      margin-left: 240px;
-      padding: 2.5rem 2.5rem 5rem 2.5rem;
-      max-width: 860px;
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem 2rem;
     }
 
-    header {
-      margin-bottom: 2.5rem;
+    /* 顶级 Hero 学者形象区 */
+    .hero-section {
+      margin-bottom: 3.5rem;
     }
 
-    /* 相册卡片滚动 */
+    /* 相册卡片（Photo Gallery） */
     .photo-gallery {
       width: 100%;
       overflow-x: auto;
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
       padding-bottom: 12px;
-      margin-bottom: 2.25rem;
+      margin-bottom: 2.5rem;
       scroll-snap-type: x mandatory;
       scrollbar-width: thin;
       scrollbar-color: rgba(255,255,255,0.15) transparent;
@@ -139,13 +142,13 @@
       position: relative;
       display: inline-block;
       vertical-align: top;
-      margin-right: 18px;
+      margin-right: 20px;
       scroll-snap-align: start;
       border-radius: var(--radius-lg);
       overflow: hidden;
       border: 1px solid var(--border-color);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
     }
 
     .photo-container:last-child {
@@ -153,58 +156,95 @@
     }
 
     .photo-container:hover {
-      transform: translateY(-4px);
+      transform: translateY(-5px);
       border-color: var(--border-hover);
     }
 
     .photo-container img {
       width: 290px;
       height: 290px;
-      border-radius: var(--radius-lg);
       object-fit: cover;
       display: block;
     }
 
     .photo-caption {
       position: absolute;
-      bottom: 10px;
-      right: 10px;
+      bottom: 12px;
+      right: 12px;
       font-size: 11px;
       font-weight: 500;
-      color: rgba(255, 255, 255, 0.9);
-      background: rgba(16, 16, 20, 0.75);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      padding: 4px 10px;
+      color: rgba(255, 255, 255, 0.95);
+      background: rgba(10, 10, 14, 0.78);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 4px 12px;
       border-radius: var(--radius-sm);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       pointer-events: none;
     }
 
+    /* 个人主标题与标签 */
+    .hero-title-group {
+      margin-bottom: 1.25rem;
+    }
+
     h1 {
-      font-size: 2.25rem;
+      font-size: 2.6rem;
       font-weight: 800;
-      letter-spacing: -0.025em;
-      margin: 0 0 0.85rem 0;
-      color: var(--text-main);
+      letter-spacing: -0.03em;
+      margin: 0 0 0.5rem 0;
+      color: var(--text-primary);
+      line-height: 1.15;
     }
 
-    header p {
-      font-size: 1.02rem;
+    .hero-subtitle {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--accent-blue);
+      margin: 0 0 1rem 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 研究方向 Badge 胶囊 */
+    .research-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge {
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(59, 130, 246, 0.08);
+      color: var(--accent-blue);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      letter-spacing: 0.01em;
+    }
+
+    .intro-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      font-size: 1.05rem;
       color: var(--text-muted);
-      line-height: 1.7;
-      margin: 0;
+      line-height: 1.75;
     }
 
     /* -------------------------------------------------------------------------- */
-    /* Spotify 控件原生格式（Native Format, No Wrapper Box）                    */
+    /* Spotify 嵌入                                                              */
     /* -------------------------------------------------------------------------- */
-    .spotify-wrapper {
-      margin: 2.25rem 0;
+    .spotify-native-wrapper {
+      margin: 2.5rem 0;
       width: 100%;
     }
 
-    .spotify-wrapper iframe {
+    .spotify-native-wrapper iframe {
       width: 100%;
       height: 298px;
       border: 0;
@@ -213,74 +253,87 @@
     }
 
     /* -------------------------------------------------------------------------- */
-    /* 章节与卡片样式（Sections & Uniform Card Styling）                         */
+    /* 章节与高定位卡片结构 (Section Architecture)                              */
     /* -------------------------------------------------------------------------- */
     section {
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
     }
 
     h2 {
-      font-size: 1.35rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      letter-spacing: -0.015em;
-      margin-bottom: 1.25rem;
-      color: var(--text-main);
+      letter-spacing: -0.02em;
+      margin: 0;
+      color: var(--text-primary);
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     h2::before {
       content: "";
       display: inline-block;
       width: 4px;
-      height: 1.1em;
-      background-color: var(--accent-color);
+      height: 1.2em;
+      background: linear-gradient(180deg, var(--accent-blue) 0%, var(--accent-cyan) 100%);
       border-radius: 2px;
     }
 
-    /* 统一规范卡片 */
+    /* 顶级统一卡片 (Card Styling) */
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 1.35rem 1.6rem;
-      margin-bottom: 1.1rem;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background-color 0.25s ease;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, background-color 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     }
 
     .card:hover {
       background: var(--card-bg-hover);
       border-color: var(--border-hover);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
     }
 
     .card p {
       margin: 0;
       color: var(--text-main);
-      line-height: 1.68;
+      line-height: 1.7;
     }
 
-    /* 统一通用的 Contact 卡片容器（解决奇数条目拉伸错位问题） */
+    /* 通用链接 */
+    a {
+      color: var(--accent-blue);
+      text-decoration: underline;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+      opacity: 0.9;
+    }
+
+    /* 联系方式整合面板 */
     .contact-card-box {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 1.35rem 1.6rem;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
-    }
-
-    .contact-card-box:hover {
-      background: var(--card-bg-hover);
-      border-color: var(--border-hover);
+      padding: 1.5rem 1.75rem;
     }
 
     .contact-item {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin: 0.85rem 0;
+      gap: 12px;
+      margin: 0.95rem 0;
       flex-wrap: wrap;
     }
 
@@ -299,26 +352,36 @@
       flex-shrink: 0;
     }
 
-    /* 链接样式 */
-    a {
-      color: var(--accent-color);
-      text-decoration: underline;
-      transition: color 0.2s ease, opacity 0.2s ease;
+    /* 发表论文高亮卡片 */
+    .pub-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
     }
 
-    a:hover {
-      color: var(--accent-hover);
-      opacity: 0.9;
+    .pub-card:hover {
+      background: var(--card-bg-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+    }
+
+    .pub-card p {
+      margin: 0;
+      line-height: 1.7;
+      color: var(--text-main);
     }
 
     /* -------------------------------------------------------------------------- */
-    /* Chronology 折叠区域（基于类名的完全修复版）                               */
+    /* Chronology 折叠卡片（标准 Class 切换修复版）                             */
     /* -------------------------------------------------------------------------- */
     .chronology-title {
       text-align: center;
       font-size: 1.25rem;
       font-weight: 600;
-      color: var(--text-main);
+      color: var(--text-primary);
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       padding: 1.25rem;
@@ -334,8 +397,8 @@
 
     .chronology-title::after {
       content: "▾";
-      font-size: 1rem;
-      color: var(--accent-color);
+      font-size: 1.1rem;
+      color: var(--accent-blue);
       transition: transform 0.25s ease;
     }
 
@@ -347,7 +410,7 @@
     .chronology-title:focus-visible {
       background: var(--card-bg-hover);
       border-color: var(--border-hover);
-      color: var(--accent-color);
+      color: var(--accent-blue);
       outline: none;
     }
 
@@ -358,12 +421,12 @@
     .chronology-content {
       display: none;
       margin-top: 1rem;
-      padding: 1.6rem;
-      background: rgba(0, 0, 0, 0.45);
+      padding: 1.75rem;
+      background: rgba(0, 0, 0, 0.5);
       border-radius: var(--radius-lg);
       border: 1px solid var(--border-color);
       white-space: pre-wrap;
-      line-height: 1.75;
+      line-height: 1.8;
       color: var(--text-muted);
       font-size: 0.95rem;
       opacity: 0;
@@ -376,118 +439,66 @@
     }
 
     /* -------------------------------------------------------------------------- */
-    /* 页脚与辅助控件 (Footer & Fixed Controls)                                   */
+    /* 页脚与辅助控件 (Footer & Controls)                                         */
     /* -------------------------------------------------------------------------- */
     footer {
       text-align: center;
-      margin-top: 4rem;
-      padding-top: 2rem;
+      margin-top: 5rem;
+      padding-top: 2.5rem;
       border-top: 1px solid var(--border-color);
     }
 
     footer p {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--text-subtle);
       margin: 0;
-    }
-
-    /* Hamburger 按钮 */
-    .hamburger {
-      display: none;
-      position: fixed;
-      top: 14px;
-      left: 14px;
-      font-size: 1.5rem;
-      color: var(--text-main);
-      z-index: 2000;
-      cursor: pointer;
-      background: rgba(16, 16, 20, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 6px 12px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-color);
-      user-select: none;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-      line-height: 1;
-    }
-
-    .hamburger:active {
-      transform: scale(0.92);
     }
 
     /* 回到顶部按钮 */
     #back-to-top {
       display: none;
       position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: var(--accent-color);
+      bottom: 32px;
+      right: 32px;
+      background-color: var(--accent-blue);
       color: #ffffff;
       border: none;
-      padding: 0.65rem 1.25rem;
+      padding: 0.7rem 1.35rem;
       border-radius: 30px;
       cursor: pointer;
       z-index: 1100;
       font-weight: 600;
       font-size: 0.9rem;
-      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     #back-to-top:hover {
       transform: translateY(-3px);
       background-color: var(--accent-hover);
-      box-shadow: 0 12px 28px rgba(59, 130, 246, 0.5);
+      box-shadow: 0 12px 28px rgba(59, 130, 246, 0.6);
     }
 
     #back-to-top:active {
       transform: scale(0.95);
     }
 
-    /* 移动端遮罩背景 */
-    .sidebar-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      z-index: 999;
-      opacity: 0;
-      transition: opacity 0.35s ease;
-    }
-
-    /* 移动端响应式适配 */
+    /* 响应式适配 */
     @media screen and (max-width: 768px) {
-      .sidebar {
-        transform: translateX(-100%);
-        width: 250px;
-        padding-top: 5rem;
-        background: rgba(16, 16, 20, 0.92);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+      .top-nav {
+        padding: 0.75rem 1.25rem;
       }
 
-      .sidebar.show {
-        transform: translateX(0);
+      .nav-links {
+        display: none;
       }
 
-      .sidebar-overlay.show {
-        display: block;
-        opacity: 1;
+      .container {
+        padding: 1.5rem 1.25rem 4rem 1.25rem;
       }
 
-      .hamburger {
-        display: block;
-      }
-
-      main {
-        margin-left: 0;
-        padding: 1.5rem 1.25rem 3rem 1.25rem;
+      h1 {
+        font-size: 2rem;
       }
 
       .photo-container img {
@@ -499,39 +510,35 @@
 </head>
 <body>
 
-  <!-- Hamburger 按钮 -->
-  <div class="hamburger" role="button" aria-label="Toggle navigation menu" onclick="toggleMobileMenu()">☰</div>
-
-  <!-- 移动端遮罩背景 -->
-  <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+  <!-- 吸顶顶栏导航 -->
+  <header class="top-nav">
+    <a href="#" class="nav-brand">Kaiting Wang</a>
+    <nav class="nav-links">
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+      <a href="#publications">Publications</a>
+      <a href="#honors">Honors & Awards</a>
+    </nav>
+  </header>
 
   <!-- 回到顶部按钮 -->
   <button id="back-to-top" onclick="scrollToTop()">↑ Top</button>
-  
-  <!-- 侧边导航栏 -->
-  <nav class="sidebar">
-    <div class="sidebar-label">Navigation</div>
-    <a href="#education" onclick="closeMobileMenu()">Education</a>
-    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
-    <a href="#publications" onclick="closeMobileMenu()">Publications</a>
-    <a href="#honors" onclick="closeMobileMenu()">Honors & Awards</a>
-  </nav>
 
-  <!-- 主内容区域 -->
-  <main>
-    <header>
+  <!-- 主内容容器 -->
+  <div class="container">
+    
+    <!-- 1. Hero 学者形象区 -->
+    <div class="hero-section">
       <div class="photo-gallery">
         <div class="photo-container">
           <img src="photodalian.jpg" alt="Kaiting Wang">
           <div class="photo-caption">Dalian, China · April 2024</div>
         </div>
 
-        <!--
         <div class="photo-container">
           <img src="photoseoul.jpg" alt="Kaiting Wang">
           <div class="photo-caption">Seoul, Korea · January 2025</div>
         </div>
-        -->
         
         <div class="photo-container">
           <img src="phototoronto.jpg" alt="Kaiting Wang">
@@ -539,19 +546,37 @@
         </div>
       </div>
       
-      <h1>Kaiting Wang 王恺霆</h1>
-      <p>Hello 哈囉 您好<br>
-      This is the Personal Website of Kaiting Wang. 呢個係王愷霆嘅個人網站嚟㗎。这是王恺霆的个人网页。<br>
-      Fancy meeting you here! 好開心你嚟到呢度！很高兴你来到这里！</p>
-    </header>
+      <div class="hero-title-group">
+        <h1>Kaiting Wang 王恺霆</h1>
+        <div class="hero-subtitle">PhD Researcher @ Western University</div>
+        
+        <!-- 研究领域核心 Badge -->
+        <div class="research-badges">
+          <span class="badge">Smart Textiles</span>
+          <span class="badge">MXenes & Supercapacitors</span>
+          <span class="badge">Micro & Nano Electrode Materials</span>
+          <span class="badge">Zinc-Ion Batteries</span>
+        </div>
+      </div>
 
-    <!-- Spotify 原生格式嵌入（无额外包裹框，原汁原味） -->
-    <div class="spotify-wrapper">
-      <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3qFJpsQaOGkea5MLxbk9Jc?utm_source=generator&theme=0" width="98%" height="298" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="intro-box">
+        <p>Hello 哈囉 您好<br>
+        This is the Personal Website of Kaiting Wang. 呢個係王愷霆嘅個人網站嚟㗎。这是王恺霆的个人网页。<br>
+        Fancy meeting you here! 好開心你嚟到呢度！很高兴你来到这里！</p>
+      </div>
+    </div>
+
+    <!-- 2. Spotify 原生控件 -->
+    <div class="spotify-native-wrapper">
+      <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3qFJpsQaOGkea5MLxbk9Jc?utm_source=generator&theme=0" width="100%" height="298" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
     
+    <!-- 3. Education -->
     <section id="education">
-      <h2>Education</h2>
+      <div class="section-header">
+        <h2>Education</h2>
+      </div>
+      
       <div class="card">
         <p>2020.09 – 2024.06<br>
         China University of Petroleum-Beijing, China<br>
@@ -573,8 +598,12 @@
       </div>
     </section>
 
+    <!-- 4. Contact -->
     <section id="contact">
-      <h2>Contact</h2>
+      <div class="section-header">
+        <h2>Contact</h2>
+      </div>
+      
       <div class="contact-card-box">
         <div class="contact-item">
           <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="email">
@@ -622,31 +651,39 @@
       </div>
     </section>
 
+    <!-- 5. Publications -->
     <section id="publications">
-      <h2>Publications</h2>
-      <div class="card">
+      <div class="section-header">
+        <h2>Publications</h2>
+      </div>
+
+      <div class="pub-card">
         <p>Wang, K., Hussain, I., Singh, K., & Zhang, K. (2025). Fabrication of MXene films through various techniques: a mini review. Nanoscale, 17(26), 15676-15689.
         <a href="https://doi.org/10.1039/D5NR01272D" target="_blank" rel="noopener noreferrer">https://doi.org/10.1039/D5NR01272D</a></p>
       </div>
 
-      <div class="card">
+      <div class="pub-card">
         <p>Hussain, I., Tamang, T. L., Islam, M. N., Wang, K., Singh, K., Baek, K. H., ... & Zhang, K. (2026). Stretchable MXenes for Supercapacitors: A Review. The Chemical Record, 26(5), e202500199.
         <a href="https://doi.org/10.1002/tcr.202500199" target="_blank" rel="noopener noreferrer">https://doi.org/10.1002/tcr.202500199</a></p>
       </div>
 
-      <div class="card">
+      <div class="pub-card">
         <p>Wang, K., Qi, E., Song, X., Ghamarinia, M., Quiquero, D., Zhao, Y., & Shi, H. H. (2026). Zinc-Ion Batteries Beyond the Lab: Recent Progress on Cold-Climate Operation and Real-World Feasibility. ACS Applied Energy Materials, 9(7), 3664–3689.
         <a href="https://doi.org/10.1021/acsaem.5c03959" target="_blank" rel="noopener noreferrer">https://doi.org/10.1021/acsaem.5c03959</a></p>
       </div>
 
-      <div class="card">
+      <div class="pub-card">
         <p>Quiquero, D., Noroozi, R., Wang, K., Conliffe, R., & Shi, H. H. (2026). Evolving Beyond Nature: AI-Driven Rapid Advancements of Bio-Inspired Electronic Skin. ACS Applied Materials & Interfaces, 18(13), 18625-18657.
         <a href="https://doi.org/10.1021/acsami.5c24192" target="_blank" rel="noopener noreferrer">https://doi.org/10.1021/acsami.5c24192</a></p>
       </div>
     </section>
 
+    <!-- 6. Honors & Awards -->
     <section id="honors">
-      <h2>Honors & Awards</h2>
+      <div class="section-header">
+        <h2>Honors & Awards</h2>
+      </div>
+
       <div class="card">
         <p style="text-align:center;">
           China University of Petroleum-Beijing Merit Student & Scholarship, 2021, 2023.<br>
@@ -658,6 +695,7 @@
       </div>
     </section>
 
+    <!-- 7. Chronology -->
     <section>
       <div class="chronology-title" id="chronology-toggle" role="button" tabindex="0" onclick="toggleChronology()" onkeydown="handleChronologyKey(event)">Chronology of WANG Kaiting</div>
       <div class="chronology-content" id="chronology-content">
@@ -666,6 +704,9 @@ In the evening of October 2nd, Tuesday, August 16th in the lunar calendar, a bab
 
 2008, Age 7
 In September, he entered Gonghua Central Primary School (巩华中心小学) in Changping District, Beijing.
+
+2014, Age 13
+He began attending Wenhui Middle School (北京市文, Beijing.
 
 2014, Age 13
 He began attending Wenhui Middle School (北京市文汇中学) in Dongcheng District, Beijing. His homeroom teacher was Mrs. CHEN Jian.
@@ -684,13 +725,14 @@ He graduated from City University of Hong Kong with a Master of Science (MSc) in
       </div>
     </section>
 
+    <!-- 页脚 -->
     <footer>
       <p>
-        Last Update: 7 Aug 2026<br>
+        Last Update: 20 May 2026<br>
         &copy; 2026 WANG Kaiting. All rights reserved.
       </p>
     </footer>
-  </main>
+  </div>
 
   <script>
     // Chronology 折叠控制（标准 Class 切换修复版）
@@ -706,21 +748,6 @@ He graduated from City University of Hong Kong with a Master of Science (MSc) in
         e.preventDefault();
         toggleChronology();
       }
-    }
-
-    // 移动端折叠菜单与遮罩层控制
-    function toggleMobileMenu() {
-      const sidebar = document.querySelector('.sidebar');
-      const overlay = document.querySelector('.sidebar-overlay');
-      sidebar.classList.toggle('show');
-      overlay.classList.toggle('show');
-    }
-
-    function closeMobileMenu() {
-      const sidebar = document.querySelector('.sidebar');
-      const overlay = document.querySelector('.sidebar-overlay');
-      sidebar.classList.remove('show');
-      overlay.classList.remove('show');
     }
 
     // 回到顶部按钮控制
