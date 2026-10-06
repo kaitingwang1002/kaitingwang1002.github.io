@@ -5,23 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kaiting Wang's Personal Website | 王愷霆嘅個人網站 | 王恺霆的个人网页</title>
   <style>
-    /* -------------------------------------------------------------------------- */
-    /* 设计 Token 与系统定义                                                     */
+ 
     /* -------------------------------------------------------------------------- */
     :root {
-      --bg-color: #08080a;                  /* 深邃质感底色 */
+      --bg-color: #08080a;                  /* 底色 */
       --sidebar-bg: #101014;                /* 导航栏背景 */
-      --card-bg: rgba(255, 255, 255, 0.025); /* 统一卡片背景 */
+      --card-bg: rgba(255, 255, 255, 0.025); /* 卡片背景 */
       --card-bg-hover: rgba(255, 255, 255, 0.05);
       
       --text-main: #f4f4f5;                /* 主文字 */
       --text-muted: #a1a1aa;               /* 次要文字 */
       --text-subtle: #71717a;              /* 辅助文字 */
       
-      --accent-color: #3b82f6;             /* 高亮电光蓝 */
+      --accent-color: #3b82f6;             /* 蓝 */
       --accent-hover: #60a5fa;
       
-      --border-color: rgba(255, 255, 255, 0.08); /* 统一微光边框 */
+      --border-color: rgba(255, 255, 255, 0.08); /* 微光边框 */
       --border-hover: rgba(255, 255, 255, 0.22);
       
       --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter", "Segoe UI", Roboto, Aptos, PMingLiU, sans-serif;
@@ -45,8 +44,7 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* -------------------------------------------------------------------------- */
-    /* 侧边导航栏（Sidebar Navigation）                                           */
+    /* Sidebar Navigation    */
     /* -------------------------------------------------------------------------- */
     .sidebar {
       position: fixed;
@@ -100,8 +98,7 @@
       transform: scale(0.97);
     }
 
-    /* -------------------------------------------------------------------------- */
-    /* 主内容布局（Main Layout）                                                 */
+    /* 主内容（Main Layout）                                                 */
     /* -------------------------------------------------------------------------- */
     main {
       margin-left: 240px;
@@ -212,7 +209,6 @@
       border-radius: 12px;
     }
 
-    /* -------------------------------------------------------------------------- */
     /* 章节与卡片样式（Sections & Uniform Card Styling）                         */
     /* -------------------------------------------------------------------------- */
     section {
@@ -262,7 +258,7 @@
       line-height: 1.68;
     }
 
-    /* 统一通用的 Contact 卡片容器（解决奇数条目拉伸错位问题） */
+    /* 统一通用的 Contact 卡片容器 */
     .contact-card-box {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
